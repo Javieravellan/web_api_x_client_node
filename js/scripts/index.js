@@ -19,18 +19,20 @@ import { WebSocketClient } from './web_socket_client.js';
 // import react react-dom
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import App from './solana-devtools/buttonConnect'
+
 // my component react
-import { MyComponent } from './HTMLComponents/react_component'
+//import { MyComponent } from './HTMLComponents/react_component'
 
 // inicio de prueba con reactJS
-const UIManager = {
+/*const UIManager = {
     getColor: function (parent, callback) {
         callback($("#oferCount").css('background-color'), parent)
     },
     setColor: function (name) {
         $("#oferCount").css('background-color', name);
     }
-}; 
+}; */
 /// fin de objeto de prueba
 
 let nota = `Presione el botón <strong>Pagar, siguiente</strong> solo si está seguro de haber realizado`
@@ -155,12 +157,12 @@ $(async function () {
     $("#text-message").keypress(enviarMensajeChatConENTER)
     $("#send-image").change(enviarMensajeChat)
 
-    setTimeout(function()  {
-        let root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(
-            React.createElement(MyComponent, { context: UIManager })
-        )
-    }, 0)
+    /*setTimeout(function()  {*/
+    let root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(
+        React.createElement(App /*, { context: UIManager }*/)
+    )
+    /*}, 0)*/
 });
 
 // funciones para renderizar en la GUI
