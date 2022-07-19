@@ -1,4 +1,9 @@
+# folders
 /node_modules
 /images
 /ajax
+/dist
 .vscode
+
+# Files
+*.txt

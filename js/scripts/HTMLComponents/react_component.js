@@ -1,6 +1,6 @@
-const e = React.createElement;
+import React from 'react'
 
-class MyComponent extends React.Component {
+export class MyComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -23,7 +23,6 @@ class MyComponent extends React.Component {
     }
 
     render() {
-        //return e('button', {className: 'btn btn-primary', onClick: this.onClick}, 'Click Me!');
         return (
             <button 
                 type='button' 

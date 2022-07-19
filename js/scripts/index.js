@@ -16,6 +16,11 @@ import { notificador } from './notificaciones.js';
 import { validarForm2 } from "./validador.js";
 import { URL_BASE } from './vars.js';
 import { WebSocketClient } from './web_socket_client.js';
+// import react react-dom
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+// my component react
+import { MyComponent } from './HTMLComponents/react_component'
 
 // inicio de prueba con reactJS
 const UIManager = {
