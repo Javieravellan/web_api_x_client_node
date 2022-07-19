@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="keywords" content="" />
+	<meta name="author" content="" />
+	<meta name="robots" content="" />
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta name="description" content="LansXY - Protocolo abierto P2P en subasta inversa" />
+	<meta property="og:title" content="LansXY - Protocolo abierto P2P en subasta inversa" />
+	<meta property="og:description" content="LansXY - Protocolo abierto P2P en subasta inversa" />
+	<meta property="og:image" content="https://lansxy.io" />
+	<meta name="format-detection" content="telephone=no">
+	<title>Lansxy</title>
+	<!-- Favicon icon -->
+	<link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
+	<link rel="stylesheet" href="./vendor/chartist/css/chartist.min.css">
+	<link href="./vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
+	<link href="./css/style.css" rel="stylesheet">
+	<style>
+		.project-nav {
+			margin-top: 30px !important;
+		}
+	</style>
+</head>
+
+<body>
+
+	<!--*******************
+        Preloader start
+    ********************-->
+	<div id="preloader">
+		<div class="sk-three-bounce">
+			<div class="sk-child sk-bounce1"></div>
+			<div class="sk-child sk-bounce2"></div>
+			<div class="sk-child sk-bounce3"></div>
+		</div>
+	</div>
+	<!--*******************
+        Preloader end
+    ********************-->
+
+	<!--**********************************
+        Main wrapper start
+    ***********************************-->
+	<div id="main-wrapper">
+
+		<!--**********************************
+            Nav header start
+        ***********************************-->
+		<div class="nav-header">
+			<a href="index.html" class="brand-logo">
+				<svg class="logo-abbr" width="50" height="50" viewBox="0 0 50 50" fill="none"
+					xmlns="http://www.w3.org/2000/svg">
+					<rect class="svg-logo-rect" width="50" height="50" rx="6" fill="#EB8153" />
+					<path class="svg-logo-path"
+						d="M17.5158 25.8619L19.8088 25.2475L14.8746 11.1774C14.5189 9.84988 15.8701 9.0998 16.8205 9.75055L33.0924 22.2055C33.7045 22.5589 33.8512 24.0717 32.6444 24.3951L30.3514 25.0095L35.2856 39.0796C35.6973 40.1334 34.4431 41.2455 33.3397 40.5064L17.0678 28.0515C16.2057 27.2477 16.5504 26.1205 17.5158 25.8619ZM18.685 14.2955L22.2224 24.6007L29.4633 22.6605L18.685 14.2955ZM31.4751 35.9615L27.8171 25.6886L20.5762 27.6288L31.4751 35.9615Z"
+						fill="white" />
+				</svg>
+			</a>
+
+			<div class="nav-control">
+				<div class="hamburger">
+					<span class="line"></span><span class="line"></span><span class="line"></span>
+				</div>
+			</div>
+		</div>
+
+		<div class="header">
+			<div class="header-content">
+				<nav class="navbar navbar-expand">
+					<div class="collapse navbar-collapse justify-content-between">
+						<div class="header-left">
+						</div>
+
+						<ul class="navbar-nav header-right main-notification">
+							<li class="nav-item dropdown notification_dropdown">
+							</li>
+							<li class="nav-item dropdown notification_dropdown">
+								<a class="nav-link bell dz-theme-mode" href="#">
+									<i id="icon-light" class="fa fa-sun-o"></i>
+									<i id="icon-dark" class="fa fa-moon-o"></i>
+								</a>
+
+							</li>
+							<li class="nav-item dropdown notification_dropdown">
+								<a class="nav-link  ai-icon" href="javascript:void(0)" role="button"
+									data-toggle="dropdown">
+									<svg class="bell-icon" width="24" height="24" viewBox="0 0 28 28" fill="none"
+										xmlns="http://www.w3.org/2000/svg">
+										<path
+											d="M22.75 15.8385V13.0463C22.7471 10.8855 21.9385 8.80353 20.4821 7.20735C19.0258 5.61116 17.0264 4.61555 14.875 4.41516V2.625C14.875 2.39294 14.7828 2.17038 14.6187 2.00628C14.4546 1.84219 14.2321 1.75 14 1.75C13.7679 1.75 13.5454 1.84219 13.3813 2.00628C13.2172 2.17038 13.125 2.39294 13.125 2.625V4.41534C10.9736 4.61572 8.97429 5.61131 7.51794 7.20746C6.06159 8.80361 5.25291 10.8855 5.25 13.0463V15.8383C4.26257 16.0412 3.37529 16.5784 2.73774 17.3593C2.10019 18.1401 1.75134 19.1169 1.75 20.125C1.75076 20.821 2.02757 21.4882 2.51969 21.9803C3.01181 22.4724 3.67904 22.7492 4.375 22.75H9.71346C9.91521 23.738 10.452 24.6259 11.2331 25.2636C12.0142 25.9013 12.9916 26.2497 14 26.2497C15.0084 26.2497 15.9858 25.9013 16.7669 25.2636C17.548 24.6259 18.0848 23.738 18.2865 22.75H23.625C24.321 22.7492 24.9882 22.4724 25.4803 21.9803C25.9724 21.4882 26.2492 20.821 26.25 20.125C26.2486 19.117 25.8998 18.1402 25.2622 17.3594C24.6247 16.5786 23.7374 16.0414 22.75 15.8385ZM7 13.0463C7.00232 11.2113 7.73226 9.45223 9.02974 8.15474C10.3272 6.85726 12.0863 6.12732 13.9212 6.125H14.0788C15.9137 6.12732 17.6728 6.85726 18.9703 8.15474C20.2677 9.45223 20.9977 11.2113 21 13.0463V15.75H7V13.0463ZM14 24.5C13.4589 24.4983 12.9316 24.3292 12.4905 24.0159C12.0493 23.7026 11.716 23.2604 11.5363 22.75H16.4637C16.284 23.2604 15.9507 23.7026 15.5095 24.0159C15.0684 24.3292 14.5411 24.4983 14 24.5ZM23.625 21H4.375C4.14298 20.9999 3.9205 20.9076 3.75644 20.7436C3.59237 20.5795 3.50014 20.357 3.5 20.125C3.50076 19.429 3.77757 18.7618 4.26969 18.2697C4.76181 17.7776 5.42904 17.5008 6.125 17.5H21.875C22.571 17.5008 23.2382 17.7776 23.7303 18.2697C24.2224 18.7618 24.4992 19.429 24.5 20.125C24.4999 20.357 24.4076 20.5795 24.2436 20.7436C24.0795 20.9076 23.857 20.9999 23.625 21Z"
+											fill="#EB8153" />
+									</svg>
+									<div class="pulse-css"></div>
+								</a>
+								<div class="dropdown-menu dropdown-menu-right">
+									<div id="dlab_W_Notification1" class="widget-media dz-scroll p-3 height380">
+										<ul id="ul-notification" class="timeline h-100">
+											<li class="d-flex align-items-center justify-content-center h-100">
+												No hay notificaciones recientes.
+												<!-- mensaje por defecto -->
+											</li>
+										</ul>
+									</div>
+									<a class="all-notification" href="javascript:void(0)">See all notifications <i
+											class="ti-arrow-right"></i></a>
+								</div>
+							</li>
+
+
+							<li id="profile" class="nav-item dropdown header-profile" data-modo="1"
+								data-nivel-pagina="0">
+								<a class="nav-link" href="#" role="button" data-toggle="dropdown">
+									<img class="foto-perfil" src="images/profile/pic1.jpg" width="20" alt="" />
+									<div class="header-info">
+										<span id="nameUser"
+											style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap"></span>
+										<small>ID: <span id="idUser"
+												style="display: inline; font-size: inherit"></span></small>
+									</div>
+								</a>
+								<div class="dropdown-menu dropdown-menu-right">
+									<a href="./profile.html" class="dropdown-item ai-icon">
+										<svg id="icon-user1" xmlns="http://www.w3.org/2000/svg" class="text-primary"
+											width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+											stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+											<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+											<circle cx="12" cy="7" r="4"></circle>
+										</svg>
+										<span class="ml-2">Profile </span>
+									</a>
+									<a id="btn-logout" href="javascript:void(0)" class="dropdown-item ai-icon">
+										<svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger"
+											width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+											stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+											<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+											<polyline points="16 17 21 12 16 7"></polyline>
+											<line x1="21" y1="12" x2="9" y2="12"></line>
+										</svg>
+										<span class="ml-2">Logout </span>
+									</a>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+		</div>
+
+		<div class="modal fade" id="crearSolicitudCompra">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<p style="font-size:16px" id="no-cuentas" class="m-0 text-danger"></p>
+					</div>
+					<div class="modal-header pt-0">
+						<h5 class="modal-title">Quiero comprar</h5>
+						<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+					</div>
+					<div class="modal-body pt-0">
+						<form name="form_crear" class="comment-form needs-validation" novalidate>
+							<input type="hidden" id="lastID">
+							<div class="row">
+								<div class="col-lg-6">
+									<div class="form-group">
+										<label class="text-black font-w600">Activo <span
+												class="required">*</span></label>
+										<div class="form-group">
+											<select id="select_de" data-live-search="true" required
+												class="default-select">
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<label class="text-black font-w600">a <span class="required">*</span></label>
+										<div class="input-group">
+											<input id="in_valor_a" type="text" class="form-control" value=""
+												placeholder="¿cuánto ofrece?">
+											<div class="input-group-append">
+												<span class="input-group-text">C/U</span>
+											</div>
+										</div>
+										<div class="mt-2">
+											<input id="check-valor-mrk" type="checkbox" />
+											<label for="check-valor-mrk" class="text-danger ml-1">
+												<u>Dejar valor de mercado</u>
+											</label>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<label for="valor" class="text-black font-w600">Cantidad <span
+												class="required">*</span></label>
+										<input id="valor" type="text" class="form-control" name="Valor"
+											placeholder="0.00">
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<label class="text-black font-w600">Descripción cantidad <span
+												class="required">*</span></label>
+										<select id="select_valor" data-live-search="true" class="default-select">
+											<option value="1">USD</option>
+											<option value="2">EUR</option>
+											<option value="3">MXN</option>
+											<option value="4">CLP</option>
+											<option value="5">PEN</option>
+											<option value="6">COP</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-lg-12">
+									<fieldset disabled>
+										<div class="form-group">
+											<label class="text-black font-w600">Valor a obtener: </label>
+											<label id="in_auto" class="text-primary font-weight-bold ml-3 h4"></label>
+										</div>
+									</fieldset>
+								</div>
+								<div class="col-lg-12">
+									<div class="form-group">
+										<label class="text-black font-w600">Transfiriendo desde <span
+												class="required">*</span></label>
+										<select multiple id="sel2" style="height:auto" data-live-search="true"
+											class="w-100 default-select">
+										</select>
+									</div>
+								</div>
+								<div class="col-lg-12">
+									<div class="form-group">
+										<label class="text-black font-w600">Cuentas receptoras: <span
+												class="required">*</span></label>
+										<select multiple id="ctasRecepcion" style="height:auto"
+											class="w-100 default-select" data-live-search="true">
+										</select>
+									</div>
+								</div>
+								<div class="col-lg-12">
+									<div class="form-group">
+										<label class="text-black font-w600">Finaliza en (min)</label>
+										<div class="input-group">
+											<input id="in_tiempo" type="text" value="30" class="form-control"
+												placeholder="EJ: 60">
+											<div class="input-group-append">
+												<span class="input-group-text">Minutos</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-12">
+									<div class="form-group mb-0">
+										<input id="enviarCompra" type="submit" value="Enviar"
+											class="submit btn btn-primary" name="submit">
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- <div class="deznav">
+			<div class="deznav-scroll">
+				<ul class="metismenu" id="menu">
+					<li class="nav-label">Principal</li>
+					<li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="true">
+							<i class="flaticon-077-menu-1"></i>
+							<span class="nav-text">Solicitudes de Compra</span>
+						</a> </li>
+
+					<li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-061-puzzle"></i>
+							<span class="nav-text">En Proceso</span>
+						</a></li>
+
+					<li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-061-puzzle"></i>
+							<span class="nav-text">Mercado Entrada y Salida</span>
+						</a></li>
+
+					<li class="nav-label">components</li>
+					<li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-003-diamond"></i>
+							<span class="nav-text">Bootstrap</span>
+						</a>
+						<ul aria-expanded="false">
+							<li><a href="./ui-accordion.html">Accordion</a></li>
+							<li><a href="./ui-alert.html">Alert</a></li>
+							<li><a href="./ui-badge.html">Badge</a></li>
+							<li><a href="./ui-button.html">Button</a></li>
+							<li><a href="./ui-modal.html">Modal</a></li>
+							<li><a href="./ui-button-group.html">Button Group</a></li>
+							<li><a href="./ui-list-group.html">List Group</a></li>
+							<li><a href="./ui-media-object.html">Media Object</a></li>
+							<li><a href="./ui-card.html">Cards</a></li>
+							<li><a href="./ui-carousel.html">Carousel</a></li>
+							<li><a href="./ui-dropdown.html">Dropdown</a></li>
+							<li><a href="./ui-popover.html">Popover</a></li>
+							<li><a href="./ui-progressbar.html">Progressbar</a></li>
+							<li><a href="./ui-tab.html">Tab</a></li>
+							<li><a href="./ui-typography.html">Typography</a></li>
+							<li><a href="./ui-pagination.html">Pagination</a></li>
+							<li><a href="./ui-grid.html">Grid</a></li>
+
+						</ul>
+					</li>
+					<li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-053-heart"></i>
+							<span class="nav-text">Plugins</span>
+						</a>
+						<ul aria-expanded="false">
+							<li><a href="./uc-select2.html">Select 2</a></li>
+							<li><a href="./uc-nestable.html">Nestedable</a></li>
+							<li><a href="./uc-noui-slider.html">Noui Slider</a></li>
+							<li><a href="./uc-sweetalert.html">Sweet Alert</a></li>
+							<li><a href="./uc-toastr.html">Toastr</a></li>
+							<li><a href="./map-jqvmap.html">Jqv Map</a></li>
+							<li><a href="./uc-lightgallery.html">Light Gallery</a></li>
+						</ul>
+					</li>
+					<li><a href="widget-basic.html" class="ai-icon" aria-expanded="false">
+							<i class="flaticon-381-settings-2"></i>
+							<span class="nav-text">Widget</span>
+						</a>
+					</li>
+					<li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-044-file"></i>
+							<span class="nav-text">Forms</span>
+						</a>
+						<ul aria-expanded="false">
+							<li><a href="./form-element.html">Form Elements</a></li>
+							<li><a href="./form-wizard.html">Wizard</a></li>
+							<li><a href="./form-editor-summernote.html">Summernote</a></li>
+							<li><a href="form-pickers.html">Pickers</a></li>
+							<li><a href="form-validation-jquery.html">Jquery Validate</a></li>
+						</ul>
+					</li>
+					<li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-381-network"></i>
+							<span class="nav-text">Table</span>
+						</a>
+						<ul aria-expanded="false">
+							<li><a href="table-bootstrap-basic.html">Bootstrap</a></li>
+							<li><a href="table-datatable-basic.html">Datatable</a></li>
+						</ul>
+					</li>
+					<li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-049-copy"></i>
+							<span class="nav-text">Pages</span>
+						</a>
+						<ul aria-expanded="false">
+							<li><a href="./page-register.html">Register</a></li>
+							<li><a href="./page-login.html">Login</a></li>
+							<li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Error</a>
+								<ul aria-expanded="false">
+									<li><a href="./page-error-400.html">Error 400</a></li>
+									<li><a href="./page-error-403.html">Error 403</a></li>
+									<li><a href="./page-error-404.html">Error 404</a></li>
+									<li><a href="./page-error-500.html">Error 500</a></li>
+									<li><a href="./page-error-503.html">Error 503</a></li>
+								</ul>
+							</li>
+							<li><a href="./page-lock-screen.html">Lock Screen</a></li>
+						</ul>
+					</li>
+				</ul>
+				<div class="copyright">
+					<p><strong>LANS p2p bajo demanda</strong> © 2021 All Rights Reserved</p>
+					<p class="fs-12">Made with <span class="heart"></span> by DexignZone</p> 
+				</div>
+			</div>
+		</div> -->
+
+		<div class="deznav">
+			<div class="deznav-scroll">
+				<!-- <div class="main-profile">
+							<div class="image-bx">
+								<img src="images/Untitled-1.jpg" alt="">
+								<a href="javascript:void(0);"><i class="fa fa-cog" aria-hidden="true"></i></a>
+							</div>
+							<h5 class="name"><span class="font-w400">Hello,</span> Marquez</h5>
+							<p class="email">marquezzzz@mail.com</p>
+						</div> -->
+				<ul class="metismenu" id="menu">
+					<!-- <li class="nav-label first">Main Menu</li>
+		                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+									<i class="flaticon-144-layout"></i>
+									<span class="nav-text">Dashboard</span>
+								</a> -->
+					<!-- <ul aria-expanded="false">
+									<li><a href="index.html">Dashboard Light</a></li>
+									<li><a href="index-2.html">Dashboard Dark</a></li>
+									<li><a href="my-wallets.html">Wallet</a></li>
+									<li><a href="tranasactions.html">Transactions</a></li>
+									<li><a href="coin-details.html">Coin Details</a></li>
+									<li><a href="portofolio.html">Portofolio</a></li>
+									<li><a href="market-capital.html">Market Capital</a></li>
+								</ul>
+		
+		                    </li> -->
+					<li class="nav-label">Principal</li>
+					<li><a class="has-arrow ai-icon" href="./index.html" aria-expanded="true">
+							<i class="flaticon-077-menu-1" style="vertical-align: baseline"></i>
+							<span class="nav-text"> Usuarios comprando</span>
+						</a> </li>
+
+					<li class=" mm-active"><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+							<i class="flaticon-061-puzzle" style="vertical-align: baseline"></i>
+							<span class="nav-text">Mis Pedidos</span>
+						</a></li>
+
+					<li><a class="has-arrow ai-icon" href="./ofertas_programadas.html" aria-expanded="false">
+							<i class="fa fa-code" style="vertical-align: baseline"></i>
+							<span class="nav-text">Ofertas programadas</span>
+						</a></li>
+				</ul>
+
+			</div>
+		</div>
+		<!--**********************************
+            Sidebar end
+        ***********************************-->
+
+		<!--**********************************
+            Content body start
+        ***********************************-->
+		<div class="content-body">
+			<div class="container-fluid">
+				<!-- Add Project -->
+				<div class="project-nav">
+					<div class="card-action card-tabs  mr-auto">
+						<ul class="nav nav-tabs style-2">
+							<li class="nav-item">
+								<a href="#navpills-1" class="nav-link active" data-toggle="tab" aria-expanded="false"
+									style="font-size: 22px;color: #68cf29;  display: block;font-weight: 600;padding-top: 10px;">Usuarios comprando </a>
+							</li>
+						</ul>
+					</div>
+					<!--
+						aplicar filtro para las solicitudes
+					-->
+					<button id="btnSolicitar" data-toggle="modal" data-target="#crearSolicitudCompra" type="button"
+						class="btn btn-whatsapp">
+						<font style="vertical-align: inherit;">
+							<font style="vertical-align: inherit;"><i class="fa fa-plus"></i> Crear Solicitud </font>
+						</font>
+					</button>
+				</div>
+
+				<div class="tab-content project-list-group" id="myTabContent">
+					<div id="alerta"></div>
+					<div id="errorData"></div>
+					<div class="tab-pane fade active show" id="navpills-1">
+						<nav class="mt-5">
+							<ul class="pagination pagination-gutter pagination-primary no-bg">
+								<li class="page-item page-indicator">
+									<a class="page-link" href="javascript:void(0)">
+										<i class="la la-angle-left"></i></a>
+								</li>
+								<li class="page-item "><a class="page-link" href="javascript:void(0)">1</a>
+								</li>
+								<li class="page-item active"><a class="page-link" href="javascript:void(0)">2</a></li>
+								<li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
+								<li class="page-item"><a class="page-link" href="javascript:void(0)">4</a></li>
+								<li class="page-item page-indicator">
+									<a class="page-link" href="javascript:void(0)">
+										<i class="la la-angle-right"></i></a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+
+					<div class="tab-pane fade" id="navpills-2">
+						<div class="card">
+							<div class="project-info">
+								<div class="col-xl-3 my-2 col-lg-4 col-sm-6">
+									<p class="text-primary mb-1">#P-000441425</p>
+									<h5 class="title font-w600 mb-2"><a href="post-details.html"
+											class="text-black">Build Branding Persona for Etza.id</a></h5>
+									<div class="text-dark"><i class="fa fa-calendar-o mr-3"
+											aria-hidden="true"></i>Created on Sep 8th, 2020</div>
+								</div>
+								<div class="col-xl-2 my-2 col-lg-4 col-sm-6">
+									<div class="d-flex align-items-center">
+										<div class="project-media">
+											<img src="images/users/pic4.jpg" alt="">
+										</div>
+										<div class="ml-2">
+											<span>Client</span>
+											<h5 class="mb-0 pt-1 font-w50 text-black">Kevin Sigh</h5>
+										</div>
+									</div>
+								</div>
+								<div class="col-xl-2 my-2 col-lg-4 col-sm-6">
+									<div class="d-flex align-items-center">
+										<div class="project-media">
+											<img src="images/users/pic3.jpg" alt="">
+										</div>
+										<div class="ml-2">
+											<span>Person in charge</span>
+											<h5 class="mb-0 pt-1 font-w500 text-black">Kevin Sigh</h5>
+										</div>
+									</div>
+								</div>
+								<div class="col-xl-3 my-2 col-lg-6 col-sm-6">
+									<div class="d-flex align-items-center">
+										<div class="power-ic">
+											<i class="fa fa-bolt" aria-hidden="true"></i>
+										</div>
+										<div class="ml-2">
+											<span>Deadline</span>
+											<h5 class="mb-0 pt-1 font-w500 text-black">Tuesday,Sep 29th 2020</h5>
+										</div>
+									</div>
+								</div>
+								<div class="col-xl-2 my-2 col-lg-6 col-sm-6">
+									<div class="d-flex project-status align-items-center">
+										<span class="btn bgl-info text-info status-btn mr-3">Progress</span>
+										<div class="dropdown">
+											<a href="javascript:void(0);" data-toggle="dropdown" aria-expanded="false">
+												<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+													xmlns="http://www.w3.org/2000/svg">
+													<path
+														d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z"
+														stroke="#575757" stroke-width="2" stroke-linecap="round"
+														stroke-linejoin="round"></path>
+													<path
+														d="M12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6Z"
+														stroke="#575757" stroke-width="2" stroke-linecap="round"
+														stroke-linejoin="round"></path>
+													<path
+														d="M12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20Z"
+														stroke="#575757" stroke-width="2" stroke-linecap="round"
+														stroke-linejoin="round"></path>
+												</svg>
+											</a>
+											<div class="dropdown-menu dropdown-menu-right">
+												<a class="dropdown-item" href="javascript:void(0);">Edit</a>
+												<a class="dropdown-item" href="javascript:void(0);">Delete</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="card">
+							<div class="project-info">
+								<div class="col-xl-3 my-2 col-lg-4 col-sm-6">
+									<p class="text-primary mb-1">#P-000441425</p>
+									<h5 class="title font-w600 mb-2"><a href="post-details.html"
+											class="text-black">Manage SEO for Eclan Company P..</a></h5>
+									<div class="text-dark"><i class="fa fa-calendar-o mr-3"
+											aria-hidden="true"></i>Created on Sep 8th, 2020</div>
+								</div>
+								<div class="col-xl-2 my-2 col-lg-4 col-sm-6">
+									<div class="d-flex align-items-center">
+										<div class="project-media">
+											<img src="images/users/pic8.jpg" alt="">
+										</div>
+										<div class="ml-2">
+											<span>Client</span>
+											<h5 class="mb-0 pt-1 font-w50 text-black">Angela Moss</h5>
+										</div>
+									</div>
+								</div>
+								<div class="col-xl-2 my-2 col-lg-4 col-sm-6">
+									<div class="d-flex align-items-center">
+										<div class="project-media">
+											<span class="img-placeholder bgl-danger text-danger">OJ</span>
+										</div>
+										<div class="ml-2">
+											<span>Person in charge</span>
+											<h5 class="mb-0 pt-1 font-w500 text-black">Olivia Jonson</h5>
+										</div>
+									</div>
+								</div>
+								<div class="col-xl-3 my-2 col-lg-6 col-sm-6">
+									<div class="d-flex align-items-center">
+										<div class="power-ic">
+											<i class="fa fa-bolt" aria-hidden="true"></i>
+										</div>
+										<div class="ml-2">
+											<span>Deadline</span>
+											<h5 class="mb-0 pt-1 font-w500 text-black">Tuesday,Sep 29th 2020</h5>
+										</div>
+									</div>
+								</div>
+								<div class="col-xl-2 my-2 col-lg-6 col-sm-6">
+									<div class="d-flex project-status align-items-center">
+										<span class="btn bgl-info text-info status-btn mr-3">Progress</span>
+										<div class="dropdown">
+											<a href="javascript:void(0);" data-toggle="dropdown" aria-expanded="false">
+												<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+													xmlns="http://www.w3.org/2000/svg">
+													<path
+														d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z"
+														stroke="#575757" stroke-width="2" stroke-linecap="round"
+														stroke-linejoin="round"></path>
+													<path
+														d="M12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6Z"
+														stroke="#575757" stroke-width="2" stroke-linecap="round"
+														stroke-linejoin="round"></path>
+													<path
+														d="M12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20Z"
+														stroke="#575757" stroke-width="2" stroke-linecap="round"
+														stroke-linejoin="round"></path>
+												</svg>
+											</a>
+											<div class="dropdown-menu dropdown-menu-right">
+												<a class="dropdown-item" href="javascript:void(0);">Edit</a>
+												<a class="dropdown-item" href="javascript:void(0);">Delete</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane fade" id="navpills-3">
+						<div class="card">
+							<div class="project-info">
+								<div class="col-xl-3 my-2 col-lg-4 col-sm-6">
+									<p class="text-primary mb-1">#P-000441425</p>
+									<h5 class="title font-w600 mb-2"><a href="post-details.html"
+											class="text-black">Build Branding Persona for Etza.id</a></h5>
+									<div class="text-dark"><i class="fa fa-calendar-o mr-3"
+											aria-hidden="true"></i>Created on Sep 8th, 2020</div>
+								</div>
+								<div class="col-xl-2 my-2 col-lg-4 col-sm-6">
+									<div class="d-flex align-items-center">
+										<div class="project-media">
+											<img src="images/users/pic4.jpg" alt="">
+										</div>
+										<div class="ml-2">
+											<span>Client</span>
+											<h5 class="mb-0 pt-1 font-w50 text-black">Kevin Sigh</h5>
+										</div>
+									</div>
+								</div>
+								<div class="col-xl-2 my-2 col-lg-4 col-sm-6">
+									<div class="d-flex align-items-center">
+										<div class="project-media">
+											<img src="images/users/pic3.jpg" alt="">
+										</div>
+										<div class="ml-2">
+											<span>Person in charge</span>
+											<h5 class="mb-0 pt-1 font-w500 text-black">Kevin Sigh</h5>
+										</div>
+									</div>
+								</div>
+								<div class="col-xl-3 my-2 col-lg-6 col-sm-6">
+									<div class="d-flex align-items-center">
+										<div class="power-ic">
+											<i class="fa fa-bolt" aria-hidden="true"></i>
+										</div>
+										<div class="ml-2">
+											<span>Deadline</span>
+											<h5 class="mb-0 pt-1 font-w500 text-black">Tuesday,Sep 29th 2020</h5>
+										</div>
+									</div>
+								</div>
+								<div class="col-xl-2 my-2 col-lg-6 col-sm-6">
+									<div class="d-flex project-status align-items-center">
+										<span class="btn bgl-warning text-warning status-btn mr-3">Pending</span>
+										<div class="dropdown">
+											<a href="javascript:void(0);" data-toggle="dropdown" aria-expanded="false">
+												<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+													xmlns="http://www.w3.org/2000/svg">
+													<path
+														d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z"
+														stroke="#575757" stroke-width="2" stroke-linecap="round"
+														stroke-linejoin="round"></path>
+													<path
+														d="M12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6Z"
+														stroke="#575757" stroke-width="2" stroke-linecap="round"
+														stroke-linejoin="round"></path>
+													<path
+														d="M12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20Z"
+														stroke="#575757" stroke-width="2" stroke-linecap="round"
+														stroke-linejoin="round"></path>
+												</svg>
+											</a>
+											<div class="dropdown-menu dropdown-menu-right">
+												<a class="dropdown-item" href="javascript:void(0);">Edit</a>
+												<a class="dropdown-item" href="javascript:void(0);">Delete</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="card">
+							<div class="project-info">
+								<div class="col-xl-3 my-2 col-lg-4 col-sm-6">
+									<p class="text-primary mb-1">#P-000441425</p>
+									<h5 class="title font-w600 mb-2"><a href="post-details.html"
+											class="text-black">Manage SEO for Eclan Company P..</a></h5>
+									<div class="text-dark"><i class="fa fa-calendar-o mr-3"
+											aria-hidden="true"></i>Created on Sep 8th, 2020</div>
+								</div>
+								<div class="col-xl-2 my-2 col-lg-4 col-sm-6">
+									<div class="d-flex align-items-center">
+										<div class="project-media">
+											<img src="images/users/pic8.jpg" alt="">
+										</div>
+										<div class="ml-2">
+											<span>Client</span>
+											<h5 class="mb-0 pt-1 font-w50 text-black">Angela Moss</h5>
+										</div>
+									</div>
+								</div>
+								<div class="col-xl-2 my-2 col-lg-4 col-sm-6">
+									<div class="d-flex align-items-center">
+										<div class="project-media">
+											<span class="img-placeholder bgl-danger text-danger">OJ</span>
+										</div>
+										<div class="ml-2">
+											<span>Person in charge</span>
+											<h5 class="mb-0 pt-1 font-w500 text-black">Olivia Jonson</h5>
+										</div>
+									</div>
+								</div>
+								<div class="col-xl-3 my-2 col-lg-6 col-sm-6">
+									<div class="d-flex align-items-center">
+										<div class="power-ic">
+											<i class="fa fa-bolt" aria-hidden="true"></i>
+										</div>
+										<div class="ml-2">
+											<span>Deadline</span>
+											<h5 class="mb-0 pt-1 font-w500 text-black">Tuesday,Sep 29th 2020</h5>
+										</div>
+									</div>
+								</div>
+								<div class="col-xl-2 my-2 col-lg-6 col-sm-6">
+									<div class="d-flex project-status align-items-center">
+										<span class="btn bgl-warning text-warning status-btn mr-3">Pending</span>
+										<div class="dropdown">
+											<a href="javascript:void(0);" data-toggle="dropdown" aria-expanded="false">
+												<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+													xmlns="http://www.w3.org/2000/svg">
+													<path
+														d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z"
+														stroke="#575757" stroke-width="2" stroke-linecap="round"
+														stroke-linejoin="round"></path>
+													<path
+														d="M12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6Z"
+														stroke="#575757" stroke-width="2" stroke-linecap="round"
+														stroke-linejoin="round"></path>
+													<path
+														d="M12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20Z"
+														stroke="#575757" stroke-width="2" stroke-linecap="round"
+														stroke-linejoin="round"></path>
+												</svg>
+											</a>
+											<div class="dropdown-menu dropdown-menu-right">
+												<a class="dropdown-item" href="javascript:void(0);">Edit</a>
+												<a class="dropdown-item" href="javascript:void(0);">Delete</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="card">
+							<div class="project-info">
+								<div class="col-xl-3 my-2 col-lg-4 col-sm-6">
+									<p class="text-primary mb-1">#P-000441425</p>
+									<h5 class="title font-w600 mb-2"><a href="post-details.html"
+											class="text-black">Reduce Website Page Size Omah</a></h5>
+									<div class="text-dark"><i class="fa fa-calendar-o mr-3"
+											aria-hidden="true"></i>Created on Sep 8th, 2020</div>
+								</div>
+								<div class="col-xl-2 my-2 col-lg-4 col-sm-6">
+									<div class="d-flex align-items-center">
+										<div class="project-media">
+											<span class="img-placeholder bgl-info text-info">EA</span>
+										</div>
+										<div class="ml-2">
+											<span>Client</span>
+											<h5 class="mb-0 pt-1 font-w50 text-black">Endge Aes</h5>
+										</div>
+									</div>
+								</div>
+								<div class="col-xl-2 my-2 col-lg-4 col-sm-6">
+									<div class="d-flex align-items-center">
+										<div class="project-media">
+											<span class="img-placeholder bgl-success text-success">BS</span>
+										</div>
+										<div class="ml-2">
+											<span>Person in charge</span>
+											<h5 class="mb-0 pt-1 font-w500 text-black">Bella Sirait</h5>
+										</div>
+									</div>
+								</div>
+								<div class="col-xl-3 my-2 col-lg-6 col-sm-6">
+									<div class="d-flex align-items-center">
+										<div class="power-ic">
+											<i class="fa fa-bolt" aria-hidden="true"></i>
+										</div>
+										<div class="ml-2">
+											<span>Deadline</span>
+											<h5 class="mb-0 pt-1 font-w500 text-black">Tuesday,Sep 29th 2020</h5>
+										</div>
+									</div>
+								</div>
+								<div class="col-xl-2 my-2 col-lg-6 col-sm-6">
+									<div class="d-flex project-status align-items-center">
+										<span class="btn bgl-warning text-warning status-btn mr-3">Pending</span>
+										<div class="dropdown">
+											<a href="javascript:void(0);" data-toggle="dropdown" aria-expanded="false">
+												<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+													xmlns="http://www.w3.org/2000/svg">
+													<path
+														d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z"
+														stroke="#575757" stroke-width="2" stroke-linecap="round"
+														stroke-linejoin="round"></path>
+													<path
+														d="M12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6Z"
+														stroke="#575757" stroke-width="2" stroke-linecap="round"
+														stroke-linejoin="round"></path>
+													<path
+														d="M12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20Z"
+														stroke="#575757" stroke-width="2" stroke-linecap="round"
+														stroke-linejoin="round"></path>
+												</svg>
+											</a>
+											<div class="dropdown-menu dropdown-menu-right">
+												<a class="dropdown-item" href="javascript:void(0);">Edit</a>
+												<a class="dropdown-item" href="javascript:void(0);">Delete</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="card">
+							<div class="project-info">
+								<div class="col-xl-3 my-2 col-lg-4 col-sm-6">
+									<p class="text-primary mb-1">#P-000441425</p>
+									<h5 class="title font-w600 mb-2"><a href="post-details.html"
+											class="text-black">Build Branding Persona for Etza.id</a></h5>
+									<div class="text-dark"><i class="fa fa-calendar-o mr-3"
+											aria-hidden="true"></i>Created on Sep 8th, 2020</div>
+								</div>
+								<div class="col-xl-2 my-2 col-lg-4 col-sm-6">
+									<div class="d-flex align-items-center">
+										<div class="project-media">
+											<img src="images/users/pic4.jpg" alt="">
+										</div>
+										<div class="ml-2">
+											<span>Client</span>
+											<h5 class="mb-0 pt-1 font-w50 text-black">Kevin Sigh</h5>
+										</div>
+									</div>
+								</div>
+								<div class="col-xl-2 my-2 col-lg-4 col-sm-6">
+									<div class="d-flex align-items-center">
+										<div class="project-media">
+											<img src="images/users/pic3.jpg" alt="">
+										</div>
+										<div class="ml-2">
+											<span>Person in charge</span>
+											<h5 class="mb-0 pt-1 font-w500 text-black">Kevin Sigh</h5>
+										</div>
+									</div>
+								</div>
+								<div class="col-xl-3 my-2 col-lg-6 col-sm-6">
+									<div class="d-flex align-items-center">
+										<div class="power-ic">
+											<i class="fa fa-bolt" aria-hidden="true"></i>
+										</div>
+										<div class="ml-2">
+											<span>Deadline</span>
+											<h5 class="mb-0 pt-1 font-w500 text-black">Tuesday,Sep 29th 2020</h5>
+										</div>
+									</div>
+								</div>
+								<div class="col-xl-2 my-2 col-lg-6 col-sm-6">
+									<div class="d-flex project-status align-items-center">
+										<span class="btn bgl-warning text-warning status-btn mr-3">Pending</span>
+										<div class="dropdown">
+											<a href="javascript:void(0);" data-toggle="dropdown" aria-expanded="false">
+												<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+													xmlns="http://www.w3.org/2000/svg">
+													<path
+														d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z"
+														stroke="#575757" stroke-width="2" stroke-linecap="round"
+														stroke-linejoin="round"></path>
+													<path
+														d="M12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6Z"
+														stroke="#575757" stroke-width="2" stroke-linecap="round"
+														stroke-linejoin="round"></path>
+													<path
+														d="M12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20Z"
+														stroke="#575757" stroke-width="2" stroke-linecap="round"
+														stroke-linejoin="round"></path>
+												</svg>
+											</a>
+											<div class="dropdown-menu dropdown-menu-right">
+												<a class="dropdown-item" href="javascript:void(0);">Edit</a>
+												<a class="dropdown-item" href="javascript:void(0);">Delete</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane fade" id="navpills-4">
+						<div class="card">
+							<div class="project-info">
+								<div class="col-xl-3 my-2 col-lg-4 col-sm-6">
+									<p class="text-primary mb-1">#P-000441425</p>
+									<h5 class="title font-w600 mb-2"><a href="post-details.html"
+											class="text-black">Build Branding Persona for Etza.id</a></h5>
+									<div class="text-dark"><i class="fa fa-calendar-o mr-3"
+											aria-hidden="true"></i>Created on Sep 8th, 2020</div>
+								</div>
+								<div class="col-xl-2 my-2 col-lg-4 col-sm-6">
+									<div class="d-flex align-items-center">
+										<div class="project-media">
+											<img src="images/users/pic4.jpg" alt="">
+										</div>
+										<div class="ml-2">
+											<span>Client</span>
+											<h5 class="mb-0 pt-1 font-w50 text-black">Kevin Sigh</h5>
+										</div>
+									</div>
+								</div>
+								<div class="col-xl-2 my-2 col-lg-4 col-sm-6">
+									<div class="d-flex align-items-center">
+										<div class="project-media">
+											<img src="images/users/pic3.jpg" alt="">
+										</div>
+										<div class="ml-2">
+											<span>Person in charge</span>
+											<h5 class="mb-0 pt-1 font-w500 text-black">Kevin Sigh</h5>
+										</div>
+									</div>
+								</div>
+								<div class="col-xl-3 my-2 col-lg-6 col-sm-6">
+									<div class="d-flex align-items-center">
+										<div class="power-ic">
+											<i class="fa fa-bolt" aria-hidden="true"></i>
+										</div>
+										<div class="ml-2">
+											<span>Deadline</span>
+											<h5 class="mb-0 pt-1 font-w500 text-black">Tuesday,Sep 29th 2020</h5>
+										</div>
+									</div>
+								</div>
+								<div class="col-xl-2 my-2 col-lg-6 col-sm-6">
+									<div class="d-flex project-status align-items-center">
+										<span class="btn bgl-danger text-danger status-btn mr-3">Closed</span>
+										<div class="dropdown">
+											<a href="javascript:void(0);" data-toggle="dropdown" aria-expanded="false">
+												<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+													xmlns="http://www.w3.org/2000/svg">
+													<path
+														d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z"
+														stroke="#575757" stroke-width="2" stroke-linecap="round"
+														stroke-linejoin="round"></path>
+													<path
+														d="M12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6Z"
+														stroke="#575757" stroke-width="2" stroke-linecap="round"
+														stroke-linejoin="round"></path>
+													<path
+														d="M12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20Z"
+														stroke="#575757" stroke-width="2" stroke-linecap="round"
+														stroke-linejoin="round"></path>
+												</svg>
+											</a>
+											<div class="dropdown-menu dropdown-menu-right">
+												<a class="dropdown-item" href="javascript:void(0);">Edit</a>
+												<a class="dropdown-item" href="javascript:void(0);">Delete</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+			<div class="copyright">
+				<p>Copyright © Designed &amp; Developed by <a href="http://dexignzone.com/"
+						target="_blank">DexignZone</a> 2021</p>
+			</div>
+		</div>
+
+	</div>
+
+	<!-- Required vendors -->
+	<script src="./vendor/global/global.min.js"></script>
+	<script src="./vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+	<script src="./vendor/chart.js/Chart.bundle.min.js"></script>
+	<script src="./js/custom.min.js"></script>
+	<script src="./js/deznav-init.js"></script>
+	<script src="./socket.io/socket.io.js"></script>
+
+	<!-- Cargar archivos de ReactJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+	<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.24.0/babel.min.js"></script>
+	<script  type="text/babel"
+		src="./js/scripts/HTMLComponents/react_component.js" async></script>
+	<script type='module' src="./js/scripts/comprador.js"></script>
+</body>
+
+</html>

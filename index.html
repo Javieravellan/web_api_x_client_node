@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="keywords" content="" />
+	<meta name="author" content="" />
+	<meta name="robots" content="" />
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+
+	<meta name="description" content="LansXY - Protocolo abierto P2P en subasta inversa" />
+	<meta property="og:title" content="LansXY - Protocolo abierto P2P en subasta inversa" />
+	<meta property="og:description" content="LansXY - Protocolo abierto P2P en subasta inversa" />
+	<meta property="og:image" content="https://lansxy.io" />
+	<meta name="format-detection" content="telephone=no">
+	<title>Lansxy</title>
+	<!-- Favicon icon -->
+	<link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
+	<link rel="stylesheet" href="./vendor/chartist/css/chartist.min.css">
+	<link href="./vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
+	<link href="./css/style.css" rel="stylesheet">
+
+	<style>
+		#rango i {
+			transition: all ease-in-out .3s;
+		}
+
+		#rango i:hover {
+			transform: scale(1.2);
+		}
+		.project-nav {
+			margin-top: 30px !important;
+		}
+		@media only screen and (max-width:540px) and (min-width:345px) {
+			#super-card {
+				height: 680px !important;
+			}
+			.star {
+				font-size: .953rem !important;
+			}
+    	}
+	</style>
+</head>
+
+<body>
+	<div id="preloader">
+		<div class="sk-three-bounce">
+			<div class="sk-child sk-bounce1"></div>
+			<div class="sk-child sk-bounce2"></div>
+			<div class="sk-child sk-bounce3"></div>
+		</div>
+	</div>
+	<div class="modal fade" id="modal-preferencias">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header pb-0">
+					<h5 class="modal-title">Preferencia de activos.</h5>
+					<button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<h6 class="text-muted">Seleccione sus activos preferidos</h6>
+					<br>
+					<div id="row" data-selected="" data-names="" class="row"></div>
+					<button id="btnGuardarPreferencia" class="btn btn-primary">Guardar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="main-wrapper">
+		<div class="nav-header">
+			<a href="index.html" class="brand-logo">
+				<svg class="logo-abbr" width="50" height="50" viewBox="0 0 50 50" fill="none"
+					xmlns="http://www.w3.org/2000/svg">
+					<rect class="svg-logo-rect" width="50" height="50" rx="6" fill="#EB8153" />
+					<path class="svg-logo-path"
+						d="M17.5158 25.8619L19.8088 25.2475L14.8746 11.1774C14.5189 9.84988 15.8701 9.0998 16.8205 9.75055L33.0924 22.2055C33.7045 22.5589 33.8512 24.0717 32.6444 24.3951L30.3514 25.0095L35.2856 39.0796C35.6973 40.1334 34.4431 41.2455 33.3397 40.5064L17.0678 28.0515C16.2057 27.2477 16.5504 26.1205 17.5158 25.8619ZM18.685 14.2955L22.2224 24.6007L29.4633 22.6605L18.685 14.2955ZM31.4751 35.9615L27.8171 25.6886L20.5762 27.6288L31.4751 35.9615Z"
+						fill="white" />
+				</svg>
+				<span>LANS</span>
+			</a>
+
+			<div class="nav-control">
+				<div class="hamburger">
+					<span class="line"></span><span class="line"></span><span class="line"></span>
+				</div>
+			</div>
+		</div>
+		<div class="header">
+			<div class="header-content">
+				<nav id="navBar" class="navbar navbar-expand">
+					<div class="collapse navbar-collapse justify-content-between">
+						<div class="header-left justify-content-between">
+							<div id="root"></div>
+						</div>
+						<ul class="navbar-nav header-right main-notification">
+							<li class="nav-item dropdown notification_dropdown">
+								<!-- <a href="./comprador.html" class="btn btn-outline-primary mr-1">Soy comprador</a> -->
+								<!-- <a href="javascript:void(0);" class="btn btn-primary">Soy vendedor</a> -->
+							</li>
+							<li class="nav-item dropdown notification_dropdown">
+								<a class="nav-link bell dz-theme-mode" href="#">
+									<i id="icon-light" class="fa fa-sun-o"></i>
+									<i id="icon-dark" class="fa fa-moon-o"></i>
+								</a>
+							</li>
+							<li class="nav-item dropdown notification_dropdown">
+								<a class="nav-link  ai-icon" href="javascript:void(0)" role="button"
+									data-toggle="dropdown">
+									<svg class="bell-icon" width="24" height="24" viewBox="0 0 28 28" fill="none"
+										xmlns="http://www.w3.org/2000/svg">
+										<path
+											d="M22.75 15.8385V13.0463C22.7471 10.8855 21.9385 8.80353 20.4821 7.20735C19.0258 5.61116 17.0264 4.61555 14.875 4.41516V2.625C14.875 2.39294 14.7828 2.17038 14.6187 2.00628C14.4546 1.84219 14.2321 1.75 14 1.75C13.7679 1.75 13.5454 1.84219 13.3813 2.00628C13.2172 2.17038 13.125 2.39294 13.125 2.625V4.41534C10.9736 4.61572 8.97429 5.61131 7.51794 7.20746C6.06159 8.80361 5.25291 10.8855 5.25 13.0463V15.8383C4.26257 16.0412 3.37529 16.5784 2.73774 17.3593C2.10019 18.1401 1.75134 19.1169 1.75 20.125C1.75076 20.821 2.02757 21.4882 2.51969 21.9803C3.01181 22.4724 3.67904 22.7492 4.375 22.75H9.71346C9.91521 23.738 10.452 24.6259 11.2331 25.2636C12.0142 25.9013 12.9916 26.2497 14 26.2497C15.0084 26.2497 15.9858 25.9013 16.7669 25.2636C17.548 24.6259 18.0848 23.738 18.2865 22.75H23.625C24.321 22.7492 24.9882 22.4724 25.4803 21.9803C25.9724 21.4882 26.2492 20.821 26.25 20.125C26.2486 19.117 25.8998 18.1402 25.2622 17.3594C24.6247 16.5786 23.7374 16.0414 22.75 15.8385ZM7 13.0463C7.00232 11.2113 7.73226 9.45223 9.02974 8.15474C10.3272 6.85726 12.0863 6.12732 13.9212 6.125H14.0788C15.9137 6.12732 17.6728 6.85726 18.9703 8.15474C20.2677 9.45223 20.9977 11.2113 21 13.0463V15.75H7V13.0463ZM14 24.5C13.4589 24.4983 12.9316 24.3292 12.4905 24.0159C12.0493 23.7026 11.716 23.2604 11.5363 22.75H16.4637C16.284 23.2604 15.9507 23.7026 15.5095 24.0159C15.0684 24.3292 14.5411 24.4983 14 24.5ZM23.625 21H4.375C4.14298 20.9999 3.9205 20.9076 3.75644 20.7436C3.59237 20.5795 3.50014 20.357 3.5 20.125C3.50076 19.429 3.77757 18.7618 4.26969 18.2697C4.76181 17.7776 5.42904 17.5008 6.125 17.5H21.875C22.571 17.5008 23.2382 17.7776 23.7303 18.2697C24.2224 18.7618 24.4992 19.429 24.5 20.125C24.4999 20.357 24.4076 20.5795 24.2436 20.7436C24.0795 20.9076 23.857 20.9999 23.625 21Z"
+											fill="#EB8153" />
+									</svg>
+									<div class="pulse-css"></div>
+								</a>
+								<div class="dropdown-menu dropdown-menu-right">
+									<div id="dlab_W_Notification1" class="widget-media dz-scroll p-3 height380">
+										<ul id="ul-notification" class="h-100 timeline">
+											<li class="d-flex align-items-center justify-content-center h-100">
+												No hay notificaciones recientes.
+											</li>
+										</ul>
+									</div>
+									<a class="all-notification" href="javascript:void(0)">See all notifications <i
+											class="ti-arrow-right"></i></a>
+								</div>
+							</li>
+
+							<li id="profile" data-modo="0" data-nivel-pagina="0"
+								class="nav-item dropdown header-profile">
+								<a class="nav-link" href="#" role="button" data-toggle="dropdown">
+									<img class="foto-perfil" src="" width="20" alt="Foto de perfil" />
+									<div class="header-info">
+										<span id="nameUser" style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap"></span>
+										<small>ID: <span style="display: inline; font-size: inherit" id="idUser"></span></small>
+									</div>
+								</a>
+								<div class="dropdown-menu dropdown-menu-right">
+									<a href="./profile.html" class="dropdown-item ai-icon">
+										<svg id="icon-user1" xmlns="http://www.w3.org/2000/svg" class="text-primary"
+											width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+											stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+											<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+											<circle cx="12" cy="7" r="4"></circle>
+										</svg>
+										<span class="ml-2">Profile </span>
+									</a>
+									<a id="btn-logout" href="javascript:void(0)" class="dropdown-item ai-icon">
+										<svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger"
+											width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+											stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+											<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+											<polyline points="16 17 21 12 16 7"></polyline>
+											<line x1="21" y1="12" x2="9" y2="12"></line>
+										</svg>
+										<span class="ml-2">Logout </span>
+									</a>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+		</div>
+		<div class="modal fade" id="sendMessageModal2">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<p style="font-size:12px" id="no-cuentas" class="m-0 text-danger d-flex"></p>
+					</div>
+					<div class="modal-header pt-1 justify-content-start">
+						<h5 class="modal-title p-0">Vender
+							<span id="titulo-activo" class="align-self-center modal-title" style="color: rgb(207, 12, 12)"></span>
+						</h5>
+						<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+					</div>
+					<div class="modal-body pt-0">
+						<form name="form_vender" class="comment-form needs-validation" novalidate>
+							<input type="hidden" data-userReceptor="" value="" id='idOrden'>
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="form-group d-none">
+										<label for="moneda" class="text-black font-w600"></label>
+										<output id="moneda" type="text" class="form-control" name="moneda"></output>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<label class="text-black font-w600">A<span class="required">*</span></label>
+										<div class="input-group">
+											<input id="in_a" type="text" class="form-control" name="in_a"
+												placeholder="50.00">
+											<div class="input-group-append">
+												<span id='moneda_origen' class="input-group-text"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<label class="h6 text-black font-w600">Solicitado: </label><br>
+										<output id="in_solicitud" class="h3 text-muted font-w600 mt-3"></output>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<label class="text-black font-w600">Cantidad <span
+												class="required">*</span></label>
+										<input id="in_cantidad" type="text" class="form-control" value=""
+											placeholder="Valor requerido">
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<label class="text-black font-w600">Solicitado: </label><br>
+										<output id="in_can_soli" class="h3 text-muted font-w600 mt-3"></output>
+									</div>
+								</div>
+								<div class="col-lg-12">
+									<div class="form-group">
+										<label class="text-black font-w600">Finaliza en (min)</label>
+										<div class="input-group">
+											<output id="in_tiempo_res" class="form-control"
+												placeholder="EJ: 60"></output>
+											<div class="input-group-append">
+												<span class="input-group-text">Minutos</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-12">
+									<div class="form-group mb-0">
+										<input id="vender" type="submit" value="Enviar" class="submit btn btn-primary"
+											name="vender">
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="deznav">
+			<div class="deznav-scroll">
+				<!-- <div class="main-profile">
+							<div class="image-bx">
+								<img src="images/Untitled-1.jpg" alt="">
+								<a href="javascript:void(0);"><i class="fa fa-cog" aria-hidden="true"></i></a>
+							</div>
+							<h5 class="name"><span class="font-w400">Hello,</span> Marquez</h5>
+							<p class="email">marquezzzz@mail.com</p>
+						</div> -->
+				<ul class="metismenu" id="menu">
+					<!-- <li class="nav-label first">Main Menu</li>
+		                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+									<i class="flaticon-144-layout"></i>
+									<span class="nav-text">Dashboard</span>
+								</a> -->
+					<!-- <ul aria-expanded="false">
+									<li><a href="index.html">Dashboard Light</a></li>
+									<li><a href="index-2.html">Dashboard Dark</a></li>
+									<li><a href="my-wallets.html">Wallet</a></li>
+									<li><a href="tranasactions.html">Transactions</a></li>
+									<li><a href="coin-details.html">Coin Details</a></li>
+									<li><a href="portofolio.html">Portofolio</a></li>
+									<li><a href="market-capital.html">Market Capital</a></li>
+								</ul>
+		
+		                    </li> -->
+					<li class="nav-label">Principal</li>
+					<li class=" mm-active"><a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="true">
+							<i class="flaticon-077-menu-1" style="vertical-align: baseline"></i>
+							<span class="nav-text"> Usuarios comprando</span>
+						</a> </li>
+
+					<li><a class="has-arrow ai-icon" href="./comprador.html" aria-expanded="false">
+							<i class="flaticon-061-puzzle" style="vertical-align: baseline"></i>
+							<span class="nav-text">Mis Pedidos</span>
+						</a></li>
+
+					<li><a class="has-arrow ai-icon" href="./ofertas_programadas.html" aria-expanded="false">
+						<i class="fa fa-code"style="vertical-align: baseline"></i>	
+						<span class="nav-text">Ofertas programadas</span>
+						</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="modal fade" id="mensajeRegistro">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Su cuenta debe ser activada para poder continuar.</h5>
+						<button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p>Hemos enviado un código a tu dirección de email. Por favor, introduce ese código para
+							verificar tu cuenta.</p>
+						<div class="form-group">
+							<input class="form-control" type="text" id="token" required placeholder="Ej: 12574">
+							<div id="err">
+							</div>
+						</div>
+						<div class="text-right">
+							<button id="btn-generar" class="btn btn-info" disabled>Generar nuevo código</button>
+							<button id="btn-validar" class="btn btn-success">Validar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="content-body">
+			<a class="d-none btn btn secondary" id="btn-aviso" data-toggle="modal" href="#m-aviso"></a>
+			<!-- 
+				PRUEBA DE CAMBIO DE MODAL!
+			-->
+			<div id="modal_pago" class="modal fade bd-example-modal-lg" tabindex="-1"
+			role="dialog" aria-modal="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<div class="d-flex flex-column">
+							<h3 class="modal-title">Vendiendo <span id="modena_compra" style="color: rgb(207, 12, 12)">...</span>&nbsp;<span id="name-comprador" style="font-size: 16px;font-weight:normal"></span></h3>
+							<p class="text-muted mt-0 mb-0" data-actual="" id="p_orden"></p>
+						</div>
+						<button id="close_form" type="button" class="close" data-dismiss="modal"><span>×</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div id="super-card" class="card" style="height: 600px;max-height: 1000px !important;">
+							<div class="card-body chat-wrapper p-0">
+								<div class="chat-hamburger" style="right: 0 !important;z-index:9999">
+									<span></span>
+									<span></span>
+									<span></span>
+								</div>
+								<div class="chat-left-sidebar" style="max-width: 500px !important; min-width: 35% !important;">
+									<div class="chart-right-sidebar">
+										<div class="message-bx chat-box">
+											<div class="d-flex justify-content-between chat-box-header flex-wrap">
+												<div class="d-flex align-items-center">
+													<img id="foto-oferta-actual" src="" alt=""
+														class="rounded-circle main-img mr-3">
+													<h5 class="text-black font-w500 mb-sm-1 mb-0 title-nm">
+														<font style="vertical-align: inherit;">
+															<font id="chatDest" style="vertical-align: inherit;">
+																None</font>
+														</font>
+													</h5>
+												</div>
+												<div class="d-flex align-items-center">
+													<span class="d-sm-inline-block d-none">
+														<font style="vertical-align: inherit;">
+															<font style="vertical-align: inherit;">Visto por última
+																vez 4:23 a. M.</font>
+														</font>
+													</span>
+													<div class="dropdown ml-2">
+														<a href="javascript:void(0);" data-toggle="dropdown"
+															aria-expanded="false">
+															<svg width="24" height="24" viewBox="0 0 24 24"
+																fill="none" xmlns="http://www.w3.org/2000/svg">
+																<path
+																	d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z"
+																	stroke="#575757" stroke-width="2"
+																	stroke-linecap="round" stroke-linejoin="round">
+																</path>
+																<path
+																	d="M12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6Z"
+																	stroke="#575757" stroke-width="2"
+																	stroke-linecap="round" stroke-linejoin="round">
+																</path>
+																<path
+																	d="M12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20Z"
+																	stroke="#575757" stroke-width="2"
+																	stroke-linecap="round" stroke-linejoin="round">
+																</path>
+															</svg>
+														</a>
+														<div class="dropdown-menu dropdown-menu-right">
+															<a class="dropdown-item"
+																href="javascript:void(0);">Edit</a>
+															<a class="dropdown-item"
+																href="javascript:void(0);">Delete</a>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="chat-box-area dz-scroll ps" id="chartBox"
+												style="background-image:url('images/chat-bg.png');">
+												<div id="inbox" data-chat="person1" class="chat active-chat">
+												</div>
+											</div>
+											<div class="card-footer border-0 type-massage position-relative">
+												<div class="input-group">
+													<input id="text-message" class="form-control"
+														placeholder="Escribir mensaje ...">
+													<div class="input-group-append">
+														<label for="send-image"
+															class="d-inline-flex flex-column justify-content-center btn p-0 mb-0 mr-3"><i
+																class="las la-image scale5 text-secondary"></i></label>
+														<input type="file" accept="image/*" class="d-none"
+															id="send-image">
+														<button id="send-message" type="button"
+															class="send-btn btn-primary btn">
+															<font style="vertical-align: inherit;">
+																<font style="vertical-align: inherit;">ENVIAR</font>
+															</font>
+														</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<font style="vertical-align: inherit;width: 100%">
+									<div class="d-flex justify-content-start chat-box-header">
+										<div class="row">
+											<h6 class="col-md-12">Cantidad</h6>
+											<div id='cantidad' class="col-md-12 text-success h2">250 $</div>
+										</div>
+										<div class="row">
+											<h6 class="col-md-12">Precio</h6>
+											<div id="precio" class="col-md-12 h4 text-dark">3100 $</div>
+										</div>
+										<div class="row">
+											<h6 class="col-md-12">Valor a transferir</h6>
+											<div id="recibe" class="col-md-12 h4 text-dark">0.00015 ETH</div>
+										</div>
+									</div>
+									<div class="d-flex justify-content-end chat-box-header">
+										<div class="row">
+											<h6 class="col-md-12"></h6>
+										</div>
+										<div class="row w-100">
+											<div class="col-md-11 text-black text-right">Tiempo: <span id="crono"
+													class="text-danger">00:00</span></div>
+										</div>
+									</div>
+									<div id="tab" class="card-action card-tabs">
+										<ul class="nav nav-tabs style-3" role="tablist">
+											<li class="nav-item">
+												<a class="nav-link active" data-toggle="tab" href="#espera_pago"
+													role="tab" aria-selected="true">
+													<font style="vertical-align: inherit;">
+														<font style="vertical-align: inherit;">
+															1.- Esperando pago
+														</font>
+													</font>
+												</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link disabled" data-toggle="tab" href="#realiza_pago"
+													role="tab" aria-selected="false">
+													<font style="vertical-align: inherit;">
+														<font style="vertical-align: inherit;">
+															2.- Ralizar pago
+														</font>
+													</font>
+												</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link disabled" data-toggle="tab" href="#califica"
+													role="tab" aria-selected="false">
+													<font style="vertical-align: inherit;">
+														<font style="vertical-align: inherit;">
+															3.- Califica
+														</font>
+													</font>
+												</a>
+											</li>
+										</ul>
+									</div>
+									<div class="card-body message-bx px-0 pt-3">
+										<div class="tab-content" style="height:320px"
+											id="message-bx">
+											<div class="tab-pane fade active show" id="espera_pago" role="tabpanel">
+												<div class="chat-list-area" data-chat="person2">
+													<div class="image-bx">
+													</div>
+													<div id="indicador_carga"
+														class="info-body d-flex justify-content-center align-items-center height370">
+														<div id="cargando">
+															<div class="mb-2 text-center">
+																<img width='28' src="./images/ajax-loader.gif"
+																	alt="Indicador de carga">
+															</div>
+															<h7
+																class="mt-5 text-black user-name mb-0 font-w600 fs-16">
+																Esperando a que el comprador realice el pago.
+															</h7>
+															<div class="text-center">
+																<span id="crono2"
+																	class="text-danger h4">00:00</span>
+															</div>
+														</div>
+														<div id="mensaje_aviso" class="text-center mt-5 d-none">
+															<h5 class="h2">El comprador ya ha respondido.</h5>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="tab-pane fade show" id="realiza_pago" role="tabpanel">
+											</div>
+											<div class="tab-pane fade show" id="califica" role="tabpanel">
+												<div class="chat-list-area" data-chat="person2">
+													<div class="image-bx">
+													</div>
+													<div
+														class="info-body d-flex justify-content-center align-items-center">
+														<div class="card">
+															<div class="d-flex justify-content-center">
+																<h5 class="card-title text-success">
+																	<font
+																		class="p-1 border border-success rounded-circle">
+																		<i class="fa fa-check"></i>
+																	</font>
+																	Listo! Operación completada.
+																</h5>
+															</div>
+
+															<div class="card-header">
+																<h5 class="h4">Califica tu experiencia con el
+																	vendedor.</h5>
+															</div>
+															<div
+																class="card-body pt-0 d-flex justify-content-center flex-column">
+																<div data-calificacion='0' id="rango"
+																	class='navbar pt-0'>
+																	<i index='0' style='font-size: 32px;'
+																		class="fa fa-star navbar star"></i>
+																	<i index='1' style='font-size: 32px;'
+																		class="fa fa-star navbar star"></i>
+																	<i index='2' style='font-size: 32px;'
+																		class="fa fa-star navbar star"></i>
+																	<i index='3' style='font-size: 32px;'
+																		class="fa fa-star navbar star"></i>
+																	<i index='4' style='font-size: 32px;'
+																		class="fa fa-star navbar star"></i>
+																</div>
+																<div class="form-group mt-1">
+																	<label for="">Comenta tu experiencia en esta
+																		compra</label>
+																	<input type="text" id="comment"
+																		class="form-control"
+																		placeholder="Escribe algo..">
+																</div>
+																<div class="form-group text-center">
+																	<button id="btnDenunciar"
+																		class="btn btn-outline-danger">Denunciar</button>
+																	<button id="btnCalificar"
+																		class="btn btn-warning text-secondary">Aceptar</button>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</font>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
+
+			<div class="container-fluid">
+				<!-- <div class="project-nav">
+					<div class="card-action card-tabs">
+						<ul class="nav nav-tabs style-2">
+							<li class="nav-item">
+								<a id="tabDisponibles" href="#navpills-1" class="nav-link active" data-toggle="tab"
+									aria-expanded="false"
+									style="font-size: 22px;color: #68cf29;  display: block;font-weight: 600;">Usuarios comprando </a>
+							</li>
+							<li id="tabOfertando" class="nav-item">
+								<a href="#navpills-2" class="nav-link" data-toggle="tab" aria-expanded="false">Ofertando
+									en <span id="oferCount" class="badge badge-pill badge-info shadow-info">0</span></a>
+							</li>
+							<li style='display: none;' id="tabAceptadas" class="nav-item">
+								<a href="#navpills-3" class="nav-link" data-toggle="tab"
+									aria-expanded="true">Aceptadas<span
+										class="badge badge-pill badge-warning shadow-warning">4</span></a>
+							</li>
+						</ul>
+					</div>
+					<div class="row">
+						<div class="col">
+							<div class="input-group search-area right d-lg-inline-flex">
+								<div class="d-flex">
+									<label class="align-self-center font-w500 m-0">Recibe en: </label>
+								</div>
+								<select data-live-search="true" required
+								class="default-select" id="cmbRecibos">
+									<option value="0" selected>Todos</option>
+								</select>
+							</div>
+						</div>
+						<div class="col">
+							<div class="input-group search-area right d-lg-inline-flex">
+								<div class="d-flex">
+									<label class="align-self-center font-w500 m-0">Pagando en: </label>
+								</div>
+								<select data-live-search="true" required
+								class="default-select" id="cmbPagos">
+									<option value="0" selected>Todos</option>
+								</select>
+							</div>
+						</div>
+						<div class="col">
+							<div class="input-group search-area right d-lg-inline-flex">
+								<div class="d-flex">
+									<label class="align-self-center font-w500 m-0">Activos: </label>
+								</div>
+								<input id="cBusqueda" type="text" class="form-control" value="ETH, BTC" disabled>
+								<div class="input-group-append">
+									<span class="input-group-text">
+										<a id="btnPreferencias" data-toggle="modal" data-target="#modal-preferencias" href="javascript:void(0)">
+											<i class="flaticon-381-search-2"></i>
+										</a>
+									</span>
+								</div>
+							</div>
+						</div>						
+					</div>
+					<button style="display: none;" data-toggle="modal" data-target="#sendMessageModal" type="button"
+						class="btn btn-whatsapp">
+						<font style="vertical-align: inherit;">
+							<font style="vertical-align: inherit;">Crear Solicitud </font>
+						</font><span class="btn-icon-right"><i class="fa fa-whatsapp"></i></span>
+					</button>
+				</div> -->
+				
+				<div class="project-nav justify-content-start">
+					<div class="card-action card-tabs">
+						<ul class="nav nav-tabs style-2">
+							<li class="nav-item">
+								<a id="tabDisponibles" href="#navpills-1" class="nav-link active" data-toggle="tab"
+									aria-expanded="false"
+									style="font-size: 20px;color: #68cf29;  display: block;font-weight: 600;">Usuarios comprando </a>
+							</li>
+							<li id="tabOfertando" class="nav-item">
+								<a href="#navpills-2" class="nav-link" data-toggle="tab" aria-expanded="false">Ofertando
+									en <span id="oferCount" class="badge badge-pill badge-info shadow-info">0</span></a>
+							</li>
+							<li style='display: none;' id="tabAceptadas" class="nav-item">
+								<a href="#navpills-3" class="nav-link" data-toggle="tab"
+									aria-expanded="true">Aceptadas<span
+										class="badge badge-pill badge-warning shadow-warning">4</span></a>
+							</li>
+						</ul>
+					</div>
+					<div class="ml-5 nav">
+						<div class="d-flex" >
+							<div class="w-100">
+								<label class="align-self-center font-w500 m-0">Pagando en:&nbsp;</label>
+								<select data-live-search="true" required
+								class="default-select" id="cmbPagos">
+									<option value="0" selected>Todos</option>
+								</select>
+							</div>
+						</div>
+						<div style="width:200px !important;max-width:200px;">
+							<div class="d-flex">
+								<div class="d-flex w-100">
+									<label class="align-self-center font-w500 m-0">Recibe en:&nbsp;</label>
+								</div>
+								<select data-live-search="true" required
+								class="default-select" id="cmbRecibos">
+									<option value="0" selected>Todos</option>
+								</select>
+							</div>
+						</div>
+						<div class="input-group search-area right d-lg-inline-flex w-auto">
+							<div class="d-flex">
+								<label class="align-self-center font-w500 m-0">Activos:&nbsp;&nbsp;&nbsp;</label>
+							</div>
+							<input id="cBusqueda" type="text" style="max-width: 50px" class="form-control w-50 pl-0 pr-0" value="ETH, BTC" disabled>
+							<div class="input-group-append">
+								<span class="input-group-text p-1">
+									<a id="btnPreferencias" data-toggle="modal" data-target="#modal-preferencias" href="javascript:void(0)">
+										<i class="flaticon-381-search-2"></i>
+									</a>
+								</span>
+							</div>
+						</div>						
+					</div>
+					<button style="display: none;" data-toggle="modal" data-target="#sendMessageModal" type="button"
+						class="btn btn-whatsapp">
+						<font style="vertical-align: inherit;">
+							<font style="vertical-align: inherit;">Crear Solicitud </font>
+						</font><span class="btn-icon-right"><i class="fa fa-whatsapp"></i></span>
+					</button>
+				</div>
+				
+				<div class="tab-content project-list-group" id="myTabContent">
+					<!--ALERTA DE NUEVA SOLICITUD-->
+					<div id="alerta"></div>
+					<div id="errorData"></div>
+					<input type="hidden" id="lastID" value="0">
+					<div class="tab-pane fade active show" id="navpills-1">
+						<!--nav class="mt-5">
+							<ul class="pagination pagination-gutter pagination-primary no-bg">
+								<li class="page-item page-indicator">
+									<a class="page-link" href="javascript:void(0)">
+										<i class="la la-angle-left"></i></a>
+								</li>
+								<li class="page-item "><a class="page-link" href="javascript:void(0)">1</a>
+								</li>
+								<li class="page-item active"><a class="page-link" href="javascript:void(0)">2</a></li>
+								<li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
+								<li class="page-item"><a class="page-link" href="javascript:void(0)">4</a></li>
+								<li class="page-item page-indicator">
+									<a class="page-link" href="javascript:void(0)">
+										<i class="la la-angle-right"></i></a>
+								</li>
+							</ul>
+						</nav-->
+					</div>
+
+					<div class="tab-pane fade" id="navpills-2">
+						<input type="hidden" id="lastId_ofer" value="0">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+			<div class="copyright">
+				<p>Copyright © Designed &amp; Developed by <a href="http://dexignzone.com/"
+						target="_blank">DexignZone</a> 2021</p>
+			</div>
+		</div>
+	</div>
+
+	<!-- Required vendors -->
+	<script src="./vendor/global/global.min.js"></script>
+	<script src="./vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+
+	<script src="./vendor/chart.js/Chart.bundle.min.js"></script>
+
+	<script src="./js/custom.min.js"></script>
+	<script src="./js/deznav-init.js"></script>
+
+	<script type='module' src="./js/scripts/index.js"></script>
+	<script src="./socket.io/socket.io.js"></script>
+</body>
+</html>

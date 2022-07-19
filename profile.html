@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="" />
+	<meta name="author" content="" />
+	<meta name="robots" content="" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta name="description" content="Zenix - Crypto Admin Dashboard" />
+	<meta property="og:title" content="Zenix - Crypto Admin Dashboard" />
+	<meta property="og:description" content="Zenix - Crypto Admin Dashboard" />
+	<meta property="og:image" content="https://zenix.dexignzone.com/xhtml/social-image.png" />
+	<meta name="format-detection" content="telephone=no">
+    <title>Zenix -  Crypto Admin Dashboard </title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
+	<link href="./vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
+	<link href="./vendor/lightgallery/css/lightgallery.min.css" rel="stylesheet">
+	<link href="./vendor/bootstrap-select-country/dist/css/bootstrap-select-country.min.css" rel="stylesheet">
+	<link href="./css/style.css" rel="stylesheet">
+
+	<link rel="stylesheet" href="./js/scripts/plugin-select/css/style.css">
+
+	<style>
+		#cmbPais ~ button {
+			width: 100%;
+			display: block;
+		}
+	</style>
+</head>
+
+<body>
+
+    <!--*******************
+        Preloader start
+    ********************-->
+    <div id="preloader">
+        <div class="sk-three-bounce">
+            <div class="sk-child sk-bounce1"></div>
+            <div class="sk-child sk-bounce2"></div>
+            <div class="sk-child sk-bounce3"></div>
+        </div>
+    </div>
+    
+    <div id="main-wrapper">
+        <div class="nav-header">
+            <a href="index.html" class="brand-logo">
+                <svg class="logo-abbr" width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<rect class="svg-logo-rect" width="50" height="50" rx="6" fill="#EB8153"/>
+					<path class="svg-logo-path"  d="M17.5158 25.8619L19.8088 25.2475L14.8746 11.1774C14.5189 9.84988 15.8701 9.0998 16.8205 9.75055L33.0924 22.2055C33.7045 22.5589 33.8512 24.0717 32.6444 24.3951L30.3514 25.0095L35.2856 39.0796C35.6973 40.1334 34.4431 41.2455 33.3397 40.5064L17.0678 28.0515C16.2057 27.2477 16.5504 26.1205 17.5158 25.8619ZM18.685 14.2955L22.2224 24.6007L29.4633 22.6605L18.685 14.2955ZM31.4751 35.9615L27.8171 25.6886L20.5762 27.6288L31.4751 35.9615Z" fill="white"/>
+				</svg>
+                <svg class="brand-title" width="74" height="22" viewBox="0 0 74 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path class="svg-logo-path"  d="M0.784 17.556L10.92 5.152H1.176V1.12H16.436V4.564L6.776 16.968H16.548V21H0.784V17.556ZM25.7399 21.28C24.0785 21.28 22.6599 20.9347 21.4839 20.244C20.3079 19.5533 19.4025 18.6387 18.7679 17.5C18.1519 16.3613 17.8439 15.1293 17.8439 13.804C17.8439 12.3853 18.1519 11.088 18.7679 9.912C19.3839 8.736 20.2799 7.79333 21.4559 7.084C22.6319 6.37467 24.0599 6.02 25.7399 6.02C27.4012 6.02 28.8199 6.37467 29.9959 7.084C31.1719 7.79333 32.0585 8.72667 32.6559 9.884C33.2719 11.0413 33.5799 12.2827 33.5799 13.608C33.5799 14.1493 33.5425 14.6253 33.4679 15.036H22.6039C22.6785 16.0253 23.0332 16.7813 23.6679 17.304C24.3212 17.808 25.0585 18.06 25.8799 18.06C26.5332 18.06 27.1585 17.9013 27.7559 17.584C28.3532 17.2667 28.7639 16.8373 28.9879 16.296L32.7959 17.36C32.2172 18.5173 31.3119 19.46 30.0799 20.188C28.8665 20.916 27.4199 21.28 25.7399 21.28ZM22.4919 12.292H28.8759C28.7825 11.3587 28.4372 10.6213 27.8399 10.08C27.2612 9.52 26.5425 9.24 25.6839 9.24C24.8252 9.24 24.0972 9.52 23.4999 10.08C22.9212 10.64 22.5852 11.3773 22.4919 12.292ZM49.7783 21H45.2983V12.74C45.2983 11.7693 45.1116 11.0693 44.7383 10.64C44.3836 10.192 43.9076 9.968 43.3103 9.968C42.6943 9.968 42.069 10.2107 41.4343 10.696C40.7996 11.1813 40.3516 11.8067 40.0903 12.572V21H35.6103V6.3H39.6423V8.764C40.1836 7.90533 40.949 7.23333 41.9383 6.748C42.9276 6.26267 44.0663 6.02 45.3543 6.02C46.3063 6.02 47.0716 6.19733 47.6503 6.552C48.2476 6.888 48.6956 7.336 48.9943 7.896C49.3116 8.43733 49.517 9.03467 49.6103 9.688C49.7223 10.3413 49.7783 10.976 49.7783 11.592V21ZM52.7548 4.62V0.559999H57.2348V4.62H52.7548ZM52.7548 21V6.3H57.2348V21H52.7548ZM63.4657 6.3L66.0697 10.444L66.3497 10.976L66.6297 10.444L69.2337 6.3H73.8537L68.9257 13.608L73.9657 21H69.3457L66.6017 16.884L66.3497 16.352L66.0977 16.884L63.3537 21H58.7337L63.7737 13.692L58.8457 6.3H63.4657Z" fill="black"/>
+				</svg>
+            </a>
+
+            <div class="nav-control">
+                <div class="hamburger">
+                    <span class="line"></span><span class="line"></span><span class="line"></span>
+                </div>
+            </div>
+        </div>
+        
+		<!-- Add Project -->
+		<div class="modal fade" id="addProjectSidebar">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Create Project</h5>
+						<button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="form-group">
+								<label class="text-black font-w500">Project Name</label>
+								<input type="text" class="form-control">
+							</div>
+							<div class="form-group">
+								<label class="text-black font-w500">Deadline</label>
+								<input type="date" class="form-control">
+							</div>
+							<div class="form-group">
+								<label class="text-black font-w500">Client Name</label>
+								<input type="text" class="form-control">
+							</div>
+							<div class="form-group">
+								<button type="button" class="btn btn-primary">CREATE</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+        <div class="header">
+            <div class="header-content">
+                <nav class="navbar navbar-expand">
+                    <div class="collapse navbar-collapse justify-content-between">
+                        <div class="header-left">
+                        </div>
+                        <ul class="navbar-nav header-right main-notification">
+							<li id="profile" data-modo="0" data-nivel-pagina="0" class="nav-item dropdown header-profile">
+                                <a class="nav-link" href="#" role="button" data-toggle="dropdown">
+                                    <img class="foto-perfil" src="" width="20" />
+									<div class="header-info">
+										<span id="nameUser" style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap"></span>
+										<small>ID: <span style="display: inline; font-size: inherit" id="idUser"></span></small>
+									</div>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a href="./profile.html" class="dropdown-item ai-icon">
+                                        <svg id="icon-user1" xmlns="http://www.w3.org/2000/svg" class="text-primary" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                        <span class="ml-2">Profile </span>
+                                    </a>
+                                    <a id="btn-logout" href="javascript:void(0)" class="dropdown-item ai-icon">
+                                        <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                                        <span class="ml-2">Logout </span>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+			</div>
+        </div>
+
+		<div id="del-modal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Eliminar elemento</h5>
+						<button type="button" class="close" data-dismiss="modal"><span>×</span>
+						</button>
+					</div>
+					<div class="modal-body">¿Estas seguro de que quiere eliminar este elemento <strong id="elem"></strong>?</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger light" data-dismiss="modal">Cerrar</button>
+						<button id="btn-del" type="button" class="btn btn-danger">Eliminar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="modal-preferencias">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header pb-0">
+						<h5 class="modal-title">Preferencia de activos.</h5>
+						<button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<h6 class="text-muted">Seleccione sus activos preferidos</h6>
+						<br>
+						<div id="row" data-selected="" data-names="" class="row"></div>
+						<button id="btnGuardarPreferencia" class="btn btn-primary">Guardar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+        <div class="content-body">
+			<div class="container-fluid">
+                <!-- row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="profile card card-body px-3 pt-3 pb-0">
+                            <div class="profile-head">
+                                <div class="profile-info pb-0">
+									<div class="profile-photo">
+										<img src="" class="img-fluid rounded-circle foto-perfil">
+									</div>
+									<div class="profile-details flex-column">
+										<div class="profile-name px-3 pt-2">
+											<h4 id="name" class="text-primary mb-0"></h4>
+											<p>Nombre</p>
+										</div>
+										<div class="profile-email px-2 pt-2">
+											<h4 id="email" class="text-muted mb-0"></h4>
+											<p>Email</p>
+										</div>
+										<div class="profile-email px-2 pt-2">
+											<h4 id="pais" class="text-muted mb-0">Ecuador</h4>
+											<p>País/localidad</p>
+										</div>
+										<div class="profile-email px-2 pt-2">
+											<h4 id="pref-moneda" class="text-muted mb-0"></h4>
+											<p>Moneda predeterminada</p>
+										</div>
+										<div class="modal fade" id="edit-profile" style="display: none" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title">Editar mi perfil</h5>
+														<button type="button" class="close" data-dismiss="modal"><span>×</span>
+														</button>
+													</div>
+													<div class="modal-body">
+														<form class="row" id="form-edit" action="">
+															<div class="col-md-4 text-center">
+																<div class="form-group">
+																	<img id="field-photo" src="" class="rounded-circle" width="100">
+																</div>
+																<div class="form-group">
+																	<label title="Cambiar foto de perfil" for="cambiarFoto" class="btn btn-secondary btn-xxs"><i class="fa fa-upload"></i> Cambiar</label>
+																	<input type="file" name="cambiarFoto" id="cambiarFoto" accept="image/*" class="d-none">
+																	<span id="foto-error" class="valid-feedback"></span>
+																</div>
+															</div>
+															<div class="col-md-8">
+																<div class="form-group">
+																	<label class="mb-1"><strong>Nombre de usuario</strong></label>
+																	<input id="usuario" name="usuario" type="text" class="form-control" required>
+																</div>
+																<div class="form-group">
+																	<label class="mb-1"><strong>Email</strong></label>
+																	<input id="f-email" name="email" type="email" class="form-control" required>
+																</div>
+																<div class="form-group">
+																	<label class="mb-1 d-block"><strong>País</strong></label>
+																	<div id="select-cont">
+																		<a href="javascript:void(0)" id="pantalla"></a>
+																		<select name="demo" id="demo" value="0"></select>
+																		<ul id="select"></ul>
+																		<span class="errors" id="pais-error"></span>
+																	</div>
+																</div>
+																<div class="form-group d-none">
+																	<label class="mb-1"><strong>Moneda de preferencia</strong></label>
+																	<select id="cmbMoneda" class="default-select">
+																		<option value="1">USD</option>
+																		<option value="2">EUR</option>
+																		<option value="3">MXN</option>
+																		<option value="4">CLP</option>
+																		<option value="5">PEN</option>
+																		<option value="6">COP</option>
+																	</select>
+																</div>
+																<div class="form-group">
+																	<label class="mb-1"><strong>Mensaje (opcional)</strong></label>
+																	<textarea id="msg" name="msg" rows="6" class="form-control"></textarea>
+																</div>
+															</div>
+															<div class="col-md-12">
+																<div class="form-group m-0">
+																	<button id="btn-edit" type="submit" name="btnEdit" class="btn btn-success mr-1">Guardar cambios</button>
+																	<button class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>
+																</div>
+															</div>
+														</form>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="ml-auto">
+										<a href="#" id="abre-edicion" data-toggle="modal" data-target="#edit-profile" 
+											class="btn btn-outline-secondary w-100">Editar perfil</a>
+										<a href="#" id="abre-edicion" data-toggle="modal" data-target="#modal-preferencias" 
+											class="w-100 btn btn-outline-warning mt-3">Editar preferencias</a>
+									</div>
+                                </div>
+                            </div>
+							<div class="pb-3">
+                                <div class="profile-info pt-3">
+									<div>
+										Mensaje: <h4 class="d-inline" id="mensaje"></h4>
+									</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+					<!-- <div class="col-md-12">
+						Mensaje: <h4 class="d-inline" id="mensaje"></h4>
+					</div> -->
+                </div>
+                <div class="row">
+                  <!-- Parte superiro dond va la info del escrow -->
+					<div class="col-xl-6">
+					<div class="card">
+						<div class="card-body">
+							<div class="profile-statistics">
+								<div class="text-center">
+									<div class="row">
+										<div class="col">
+											<h3 class="m-b-0">150</h3><span>Follower</span>
+										</div>
+										<div class="col">
+											<h3 class="m-b-0">140</h3><span>Place Stay</span>
+										</div>
+										<div class="col">
+											<h3 class="m-b-0">45</h3><span>Reviews</span>
+										</div>
+									</div>
+									<div class="mt-4">
+										<a href="javascript:void(0);" class="btn btn-primary mb-1 mr-1">Follow</a>
+										<a href="javascript:void(0);" class="btn btn-primary mb-1" data-toggle="modal" data-target="#sendMessageModal">Send Message</a>
+									</div>
+								</div>
+								<!-- Modal -->
+								<div class="modal fade" id="sendMessageModal">
+									<div class="modal-dialog modal-dialog-centered" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title">Send Message</h5>
+												<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+											</div>
+											<div class="modal-body">
+												<form class="comment-form">
+													<div class="row">
+														<div class="col-lg-6">
+															<div class="form-group">
+																<label class="text-black font-w600">Name <span class="required">*</span></label>
+																<input type="text" class="form-control" value="Author" name="Author" placeholder="Author">
+															</div>
+														</div>
+														<div class="col-lg-6">
+															<div class="form-group">
+																<label class="text-black font-w600">Email <span class="required">*</span></label>
+																<input type="text" class="form-control" value="Email" placeholder="Email" name="Email">
+															</div>
+														</div>
+														<div class="col-lg-12">
+															<div class="form-group">
+																<label class="text-black font-w600">Comment</label>
+																<textarea rows="8" class="form-control" name="comment" placeholder="Comment"></textarea>
+															</div>
+														</div>
+														<div class="col-lg-12">
+															<div class="form-group mb-0">
+																<input type="submit" value="Post Comment" class="submit btn btn-primary" name="submit">
+															</div>
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					</div>
+					<div class="col-xl-6">
+						<div class="card">
+							<div class="card-body">
+								<div class="profile-statistics">
+									<div class="text-center">
+										<div class="row">
+											<div class="col">
+												<h3 class="m-b-0">89%</h3><span>Tasa de recomendación</span>
+											</div>
+											<div class="col">
+												<h3 id="opConcret" class="m-b-0">30</h3><span>Transaciones Completas</span>
+											</div>
+										</div>
+									</div>
+								</div>
+						  	</div>
+						</div>
+					</div>
+				</div>
+                <!-- Parte donde va el tap-->
+                <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- Nav tabs -->
+                                <div class="custom-tab-1">
+                                    <ul class="nav nav-tabs">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" data-toggle="tab" href="#reputacion"><i class="la la-star mr-2"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Reputación</font></font></a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" href="#desempenio"><i class="fa fa-user mr-2"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Desempeño</font></font></a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" href="#panel_cuentas"><i class="la la-bank mr-2"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Cuentas de Pago</font></font></a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" href="#seguridad"><i class="la la-lock mr-2"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Seguridad</font></font></a>
+                                        </li>
+										<li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" href="#historial"><i class="la la-list mr-2"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Historial de garantias</font></font></a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade active show" id="reputacion" role="tabpanel">
+                                            <div class="pt-4">
+												<div class="col-xl-16">
+													<div class="card">
+														<div class="card-body">
+															<div class="col-xl-16">
+																<div class="col-xl-6 col-lg-12 col-xxl-12">
+																	<div class="row">
+																		<div class="col-sm-6">
+																			<div>
+																				<p class="mb-2 h3">Calificación Promedio</p>
+																				<div id="rating" class="btn-group theme-colors" data-toggle="buttons">
+																					<i index='0' style='font-size: 32px;' class="fa fa-star navbar"></i>
+																					<i index='1' style='font-size: 32px;' class="fa fa-star navbar"></i>
+																					<i index='2' style='font-size: 32px;' class="fa fa-star navbar"></i>
+																					<i index='3' style='font-size: 32px;' class="fa fa-star navbar"></i>
+																					<i index='4' style='font-size: 32px;' class="fa fa-star navbar"></i>
+																				</div>
+																			</div>
+																			<div class="card">
+																				<div class="card-header  border-0 pb-0">
+																					<h4 class="card-title">Reseñas</h4>
+																				</div>
+																				<div class="card-body">
+																					<div id="DZ_W_Todo1" class="widget-media">
+																						<ul id="comentarios" class="timeline">
+																							<li class="text-center text-muted h4">
+																								No data
+																							</li>
+																						</ul>
+																					<div class="ps__rail-x" style="left: 0px; bottom: -85px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 85px; height: 370px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 70px; height: 300px;"></div></div></div>
+																				</div>
+																			</div>
+																		</div>
+																		<div class="col-sm-6">
+																			<div class="mb-4">
+																				<p class="mb-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tiempo promedio Entrega</font></font></p>
+																				<h4 class="text-black"><span id="tPromedio"></span></h4>
+																			</div>
+																			<div class="mb-4">
+																				<p class="mb-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Transacciones Canceladas</font></font></p>
+																				<h4 class="text-black"><font id="opCancel" style="vertical-align: inherit;">4</font></h4>
+																			</div>
+																			<div>
+																				<p class="mb-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Conflictos</font></font></p>
+																				<h4 class="text-black"><font id="opDenuncie" style="vertical-align: inherit;">0</font></h4>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="desempenio">
+											<div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col-xl-6 col-xxl-12">
+                                                        <div class="card-header pb-2 d-block d-sm-flex flex-wrap border-0" style="padding: 30px 0px 0px 0px;">
+                                                            <div class="mb-3">
+                                                                <h4 class="fs-20 text-black">Actividad de Comercio</h4>
+                                                                <p class="mb-0 fs-12"></p>
+                                                            </div>
+                                                            <div class="card-action card-tabs mb-3 style-1">
+                                                                <ul class="nav nav-tabs" role="tablist">
+                                                                    <li style="cursor:pointer" class="nav-item">
+                                                                        <a class="nav-link active" data-toggle="tab" id="anual">
+                                                                            Anual
+                                                                        </a>
+                                                                    </li>
+                                                                    <li style="cursor:pointer" class="nav-item">
+                                                                        <a class="nav-link" data-toggle="tab" id="mensual">
+                                                                            Mensual
+                                                                        </a>
+                                                                    </li>
+                                                                    <li style="cursor:pointer" class="nav-item">
+                                                                        <a class="nav-link" data-toggle="tab" id="todos">
+                                                                            todos
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-6" style="height: 130px;">
+                                                                <div class="card-bx stacked card">
+                                                                    <img src="images/card/card2.jpg" alt="">
+                                                                    <div class="card-info">
+                                                                        <p class="fs-14 mb-1 text-white">Ventas</p>
+                                                                        <div class="d-flex justify-content-between">
+                                                                            <h2 id="total-ventas" class="num-text text-white mb-5 font-w600">
+                                                                               $00,00</h2>
+                                                                            <svg width="55" height="34" viewBox="0 0 55 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                <circle cx="38.0091" cy="16.7788" r="16.7788" fill="white" fill-opacity="0.67"></circle>
+                                                                                <circle cx="17.4636" cy="16.7788" r="16.7788" fill="white" fill-opacity="0.67"></circle>
+                                                                            </svg>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6" style="height: 130px;">
+                                                                <div class="card-bx stacked card">
+                                                                    <img src="images/card/card4.jpg" alt="">
+                                                                    <div class="card-info">
+                                                                        <p class="mb-1 text-white fs-14">Compras</p>
+                                                                        <div class="d-flex justify-content-between">
+                                                                            <h2 id="total-compras" class="num-text text-white mb-5 font-w600">
+                                                                                $00,00</h2>
+                                                                            <svg width="55" height="34" viewBox="0 0 55 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                <circle cx="38.0091" cy="16.7788" r="16.7788" fill="white" fill-opacity="0.67"></circle>
+                                                                                <circle cx="17.4636" cy="16.7788" r="16.7788" fill="white" fill-opacity="0.67"></circle>
+                                                                            </svg>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-12">
+                                                                <div class="card">
+                                                                    <div class="card-header pb-2 d-block d-sm-flex flex-wrap border-0" style="padding: 20px 0px 0px 0px;">
+                                                                        <div class="mb-3">
+                                                                            <h4 class="fs-20 text-black">Detalle de
+                                                                                Ventas</h4>
+                                                                            <p class="mb-0 fs-12"></p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div id="detalle-ventas" class="row d-none">
+                                                                <div class="col-xl-3">
+                                                                    <div class="card-body tab-content p-0">
+                                                                        <div class="tab-pane fade active show" id="monthly">
+                                                                            <div class="table-responsive">
+                                                                                <table class="table shadow-hover  tbl-btn short-one">
+                                                                                    <tbody id="tbody-ventas">
+                                                                                        <tr>
+                                                                                            <td class="wspace-no">
+                                                                                                <svg class="mr-2" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                                    <path d="M16 9.50011C15.9992 8.67201 15.216 8.00092 14.2501 8H9V11H14.2501C15.216 10.9993 15.9992 10.328 16 9.50011Z" fill="#FFAB2D">
+                                                                                                    </path>
+                                                                                                    <path d="M9 16H14.2501C15.2165 16 16 15.3285 16 14.5001C16 13.6715 15.2165 13 14.2501 13H9V16Z" fill="#FFAB2D">
+                                                                                                    </path>
+                                                                                                    <path d="M12 0C5.3726 0 0 5.3726 0 12C0 18.6274 5.3726 24 12 24C18.6274 24 24 18.6274 24 12C23.9924 5.37574 18.6243 0.00758581 12 0ZM18.0001 14.5713C17.9978 16.4641 16.4641 17.9978 14.5716 17.9999V18.8571C14.5716 19.3305 14.1876 19.7143 13.7144 19.7143C13.2409 19.7143 12.8572 19.3305 12.8572 18.8571V17.9999H11.1431V18.8571C11.1431 19.3305 10.7591 19.7143 10.2859 19.7143C9.8124 19.7143 9.42866 19.3305 9.42866 18.8571V17.9999H6.85733C6.38387 17.9999 6.00013 17.6161 6.00013 17.1429C6.00013 16.6695 6.38387 16.2857 6.85733 16.2857H7.71427V7.71427H6.85733C6.38387 7.71427 6.00013 7.33053 6.00013 6.85707C6.00013 6.38361 6.38387 5.99987 6.85733 5.99987H9.42866V5.14293C9.42866 4.66947 9.8124 4.28573 10.2859 4.28573C10.7593 4.28573 11.1431 4.66947 11.1431 5.14293V5.99987H12.8572V5.14293C12.8572 4.66947 13.2409 4.28573 13.7144 4.28573C14.1879 4.28573 14.5716 4.66947 14.5716 5.14293V5.99987C16.4571 5.99202 17.992 7.5139 18.0001 9.39937C18.0043 10.3978 17.5714 11.3481 16.8152 12C17.5643 12.6445 17.9967 13.5828 18.0001 14.5713Z" fill="#FFAB2D">
+                                                                                                    </path>
+                                                                                                </svg>
+                                                                                                <span class="font-w600 text-black">Bitcoin</span>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <span class="font-w600 text-black">+$5,553</span>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td class="wspace-no">
+                                                                                                <svg class="mr-1" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                                    <path d="M12.3182 13.6531C12.1139 13.7348 11.8863 13.7348 11.682 13.6531L9.48944 12.7761L12.0001 17.7974L14.5107 12.7761L12.3182 13.6531Z" fill="#DC3CCC">
+                                                                                                    </path>
+                                                                                                    <path d="M12.0001 11.9341L15.0156 10.7279L12.0001 5.90308L8.98456 10.7279L12.0001 11.9341Z" fill="#DC3CCC">
+                                                                                                    </path>
+                                                                                                    <path d="M12 0C5.3726 0 0 5.3726 0 12C0 18.6274 5.3726 24 12 24C18.6274 24 24 18.6274 24 12C23.9927 5.37574 18.6243 0.00732425 12 0ZM17.0524 11.5263L12.7667 20.0977C12.5551 20.5212 12.04 20.6928 11.6168 20.4812C11.4507 20.3983 11.3162 20.2638 11.2333 20.0977L6.94757 11.5263C6.81443 11.2589 6.8296 10.9416 6.9876 10.6882L11.2733 3.83111C11.5582 3.42984 12.114 3.33515 12.5153 3.62001C12.5972 3.67808 12.6686 3.74923 12.7267 3.83111L17.0121 10.6882C17.1704 10.9416 17.1856 11.2589 17.0524 11.5263Z" fill="#DC3CCC">
+                                                                                                    </path>
+                                                                                                </svg>
+                                                                                                <span class="font-w600 text-black">Ethereum</span>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <span class="font-w600 text-black">+$5,553</span>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td class="wspace-no">
+                                                                                                <svg class="mr-2" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                                    <path d="M12.2161 0.00189099C5.59822 -0.114662 0.118718 5.17136 0.00213245 11.7875C-0.0369579 13.869 0.462987 15.8373 1.36961 17.5623H5.14217V5.75207C5.14217 5.03013 6.12354 4.80045 6.44244 5.44835L12.0001 16.6998L17.5578 5.44903C17.8767 4.80045 18.8581 5.03013 18.8581 5.75207V17.5623H22.619C23.4625 15.9594 23.9645 14.1494 23.9981 12.2194C24.1147 5.60329 18.8341 0.1253 12.2161 0.00189099Z" fill="#FF782C">
+                                                                                                    </path>
+                                                                                                    <path d="M17.4865 18.2479V8.6892L12.6146 18.5516C12.3842 19.0199 11.6154 19.0199 11.385 18.5516L6.51376 8.6892V18.2479C6.51376 18.6264 6.20721 18.9335 5.82796 18.9335H2.22685C4.36036 21.9303 7.82911 23.9241 11.7841 23.9981C15.8968 24.0708 19.5672 22.0551 21.7871 18.9335H18.1723C17.793 18.9335 17.4865 18.6264 17.4865 18.2479Z" fill="#FF782C">
+                                                                                                    </path>
+                                                                                                </svg>
+                                                                                                <span class="font-w600 text-black">Monero</span>
+                                                                                            </td>
+
+                                                                                            <td>
+                                                                                                <span class="font-w600 text-black">-$912</span>
+                                                                                            </td>
+
+                                                                                        </tr>
+                                                                                        <tr>
+
+                                                                                            <td class="wspace-no">
+                                                                                                <svg class="mr-1" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                                    <path d="M12 0C5.3726 0 0 5.3726 0 12C0 18.6274 5.3726 24 12 24C18.6274 24 24 18.6274 24 12C23.9924 5.37574 18.6243 0.00758581 12 0ZM16.2857 18.0001H9.42866C8.9552 18.0001 8.57147 17.6164 8.57147 17.1429C8.57147 17.1024 8.57434 17.0618 8.5801 17.0216L9.22515 12.5054L7.92222 12.8313C7.85421 12.8486 7.78437 12.8572 7.71427 12.8572C7.24081 12.8567 6.85759 12.4727 6.85785 11.9992C6.85838 11.6063 7.12571 11.2642 7.50683 11.1684L9.48674 10.6735L10.2942 5.0213C10.3612 4.55254 10.7954 4.22714 11.2642 4.2941C11.7329 4.36107 12.0583 4.79529 11.9914 5.26404L11.2825 10.2247L14.3636 9.4543C14.8222 9.33737 15.2886 9.61439 15.4053 10.0729C15.5222 10.5315 15.2452 10.9979 14.7866 11.1148C14.784 11.1153 14.7814 11.1161 14.7788 11.1166L11.0204 12.0562L10.4164 16.2857H16.2857C16.7592 16.2857 17.1429 16.6695 17.1429 17.1429C17.1429 17.6161 16.7592 18.0001 16.2857 18.0001Z" fill="#5F5F5F">
+                                                                                                    </path>
+                                                                                                </svg>
+                                                                                                <span class="font-w600 text-black">Litecoin</span>
+                                                                                            </td>
+
+                                                                                            <td>
+                                                                                                <span class="font-w600 text-black">+$7,762</span>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-9">
+                                                                    <div class="card">
+                                                                        <div class="card-header" style="padding: 10px 10px 10px;">
+                                                                            <h4 class="card-title">
+                                                                                <font style="vertical-align: inherit;">
+                                                                                    <font style="vertical-align: inherit;">
+                                                                                        Gráfico de Ventas</font>
+                                                                                </font>
+                                                                            </h4>
+                                                                        </div>
+                                                                        <div class="card-body"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                                                                            <div class="chartjs-size-monitor">
+                                                                                <div class="chartjs-size-monitor-expand">
+                                                                                    <div class=""></div>
+                                                                                </div>
+                                                                                <div class="chartjs-size-monitor-shrink">
+                                                                                    <div class=""></div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <canvas id="graficoVentas" width="435" height="216" style="display: block; width: 581px; height: 289px;" class="chartjs-render-monitor"></canvas>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-12">
+                                                                <div class="card">
+                                                                    <div class="card-header pb-2 d-block d-sm-flex flex-wrap border-0" style="padding: 20px 0px 0px 0px;">
+                                                                        <div class="mb-3">
+                                                                            <h4 class="fs-20 text-black">Detalle de
+                                                                                Compras</h4>
+                                                                            <p class="mb-0 fs-12"></p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div id="detalle-compras" class="row d-none">
+                                                                <div class="col-xl-3">
+                                                                    <div class="card-body tab-content p-0">
+                                                                        <div class="tab-pane fade active show" id="monthly">
+                                                                            <div class="table-responsive">
+                                                                                <table class="table shadow-hover  tbl-btn short-one">
+                                                                                    <tbody id="tbody-compras">
+                                                                                        <tr>
+                                                                                            <td class="wspace-no">
+                                                                                                <svg class="mr-2" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                                    <path d="M16 9.50011C15.9992 8.67201 15.216 8.00092 14.2501 8H9V11H14.2501C15.216 10.9993 15.9992 10.328 16 9.50011Z" fill="#FFAB2D">
+                                                                                                    </path>
+                                                                                                    <path d="M9 16H14.2501C15.2165 16 16 15.3285 16 14.5001C16 13.6715 15.2165 13 14.2501 13H9V16Z" fill="#FFAB2D">
+                                                                                                    </path>
+                                                                                                    <path d="M12 0C5.3726 0 0 5.3726 0 12C0 18.6274 5.3726 24 12 24C18.6274 24 24 18.6274 24 12C23.9924 5.37574 18.6243 0.00758581 12 0ZM18.0001 14.5713C17.9978 16.4641 16.4641 17.9978 14.5716 17.9999V18.8571C14.5716 19.3305 14.1876 19.7143 13.7144 19.7143C13.2409 19.7143 12.8572 19.3305 12.8572 18.8571V17.9999H11.1431V18.8571C11.1431 19.3305 10.7591 19.7143 10.2859 19.7143C9.8124 19.7143 9.42866 19.3305 9.42866 18.8571V17.9999H6.85733C6.38387 17.9999 6.00013 17.6161 6.00013 17.1429C6.00013 16.6695 6.38387 16.2857 6.85733 16.2857H7.71427V7.71427H6.85733C6.38387 7.71427 6.00013 7.33053 6.00013 6.85707C6.00013 6.38361 6.38387 5.99987 6.85733 5.99987H9.42866V5.14293C9.42866 4.66947 9.8124 4.28573 10.2859 4.28573C10.7593 4.28573 11.1431 4.66947 11.1431 5.14293V5.99987H12.8572V5.14293C12.8572 4.66947 13.2409 4.28573 13.7144 4.28573C14.1879 4.28573 14.5716 4.66947 14.5716 5.14293V5.99987C16.4571 5.99202 17.992 7.5139 18.0001 9.39937C18.0043 10.3978 17.5714 11.3481 16.8152 12C17.5643 12.6445 17.9967 13.5828 18.0001 14.5713Z" fill="#FFAB2D">
+                                                                                                    </path>
+                                                                                                </svg>
+                                                                                                <span class="font-w600 text-black">Bitcoin</span>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <span class="font-w600 text-black">+$5,553</span>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td class="wspace-no">
+                                                                                                <svg class="mr-1" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                                    <path d="M12.3182 13.6531C12.1139 13.7348 11.8863 13.7348 11.682 13.6531L9.48944 12.7761L12.0001 17.7974L14.5107 12.7761L12.3182 13.6531Z" fill="#DC3CCC">
+                                                                                                    </path>
+                                                                                                    <path d="M12.0001 11.9341L15.0156 10.7279L12.0001 5.90308L8.98456 10.7279L12.0001 11.9341Z" fill="#DC3CCC">
+                                                                                                    </path>
+                                                                                                    <path d="M12 0C5.3726 0 0 5.3726 0 12C0 18.6274 5.3726 24 12 24C18.6274 24 24 18.6274 24 12C23.9927 5.37574 18.6243 0.00732425 12 0ZM17.0524 11.5263L12.7667 20.0977C12.5551 20.5212 12.04 20.6928 11.6168 20.4812C11.4507 20.3983 11.3162 20.2638 11.2333 20.0977L6.94757 11.5263C6.81443 11.2589 6.8296 10.9416 6.9876 10.6882L11.2733 3.83111C11.5582 3.42984 12.114 3.33515 12.5153 3.62001C12.5972 3.67808 12.6686 3.74923 12.7267 3.83111L17.0121 10.6882C17.1704 10.9416 17.1856 11.2589 17.0524 11.5263Z" fill="#DC3CCC">
+                                                                                                    </path>
+                                                                                                </svg>
+                                                                                                <span class="font-w600 text-black">Ethereum</span>
+                                                                                            </td>
+
+                                                                                            <td>
+                                                                                                <span class="font-w600 text-black">+$5,553</span>
+                                                                                            </td>
+
+                                                                                        </tr>
+                                                                                        <tr>
+
+                                                                                            <td class="wspace-no">
+                                                                                                <svg class="mr-2" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                                    <path d="M12.2161 0.00189099C5.59822 -0.114662 0.118718 5.17136 0.00213245 11.7875C-0.0369579 13.869 0.462987 15.8373 1.36961 17.5623H5.14217V5.75207C5.14217 5.03013 6.12354 4.80045 6.44244 5.44835L12.0001 16.6998L17.5578 5.44903C17.8767 4.80045 18.8581 5.03013 18.8581 5.75207V17.5623H22.619C23.4625 15.9594 23.9645 14.1494 23.9981 12.2194C24.1147 5.60329 18.8341 0.1253 12.2161 0.00189099Z" fill="#FF782C">
+                                                                                                    </path>
+                                                                                                    <path d="M17.4865 18.2479V8.6892L12.6146 18.5516C12.3842 19.0199 11.6154 19.0199 11.385 18.5516L6.51376 8.6892V18.2479C6.51376 18.6264 6.20721 18.9335 5.82796 18.9335H2.22685C4.36036 21.9303 7.82911 23.9241 11.7841 23.9981C15.8968 24.0708 19.5672 22.0551 21.7871 18.9335H18.1723C17.793 18.9335 17.4865 18.6264 17.4865 18.2479Z" fill="#FF782C">
+                                                                                                    </path>
+                                                                                                </svg>
+                                                                                                <span class="font-w600 text-black">Monero</span>
+                                                                                            </td>
+
+                                                                                            <td>
+                                                                                                <span class="font-w600 text-black">-$912</span>
+                                                                                            </td>
+
+                                                                                        </tr>
+                                                                                        <tr>
+
+                                                                                            <td class="wspace-no">
+                                                                                                <svg class="mr-1" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                                    <path d="M12 0C5.3726 0 0 5.3726 0 12C0 18.6274 5.3726 24 12 24C18.6274 24 24 18.6274 24 12C23.9924 5.37574 18.6243 0.00758581 12 0ZM16.2857 18.0001H9.42866C8.9552 18.0001 8.57147 17.6164 8.57147 17.1429C8.57147 17.1024 8.57434 17.0618 8.5801 17.0216L9.22515 12.5054L7.92222 12.8313C7.85421 12.8486 7.78437 12.8572 7.71427 12.8572C7.24081 12.8567 6.85759 12.4727 6.85785 11.9992C6.85838 11.6063 7.12571 11.2642 7.50683 11.1684L9.48674 10.6735L10.2942 5.0213C10.3612 4.55254 10.7954 4.22714 11.2642 4.2941C11.7329 4.36107 12.0583 4.79529 11.9914 5.26404L11.2825 10.2247L14.3636 9.4543C14.8222 9.33737 15.2886 9.61439 15.4053 10.0729C15.5222 10.5315 15.2452 10.9979 14.7866 11.1148C14.784 11.1153 14.7814 11.1161 14.7788 11.1166L11.0204 12.0562L10.4164 16.2857H16.2857C16.7592 16.2857 17.1429 16.6695 17.1429 17.1429C17.1429 17.6161 16.7592 18.0001 16.2857 18.0001Z" fill="#5F5F5F">
+                                                                                                    </path>
+                                                                                                </svg>
+                                                                                                <span class="font-w600 text-black">Litecoin</span>
+                                                                                            </td>
+
+                                                                                            <td>
+                                                                                                <span class="font-w600 text-black">+$7,762</span>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-9">
+                                                                    <div class="card">
+                                                                        <div class="card-header" style="padding: 10px 10px 10px;">
+                                                                            <h4 class="card-title">
+                                                                                <font style="vertical-align: inherit;">
+                                                                                    <font style="vertical-align: inherit;">
+                                                                                        Gráfico de compras</font>
+                                                                                </font>
+                                                                            </h4>
+                                                                        </div>
+                                                                        <div class="card-body">
+                                                                            <div class="chartjs-size-monitor">
+                                                                                <div class="chartjs-size-monitor-expand">
+                                                                                    <div class=""></div>
+                                                                                </div>
+                                                                                <div class="chartjs-size-monitor-shrink">
+                                                                                    <div class=""></div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <canvas id="graficoCompras" width="477" height="238" style="display: block; width: 477px; height: 238px;" class="chartjs-render-monitor"></canvas>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="panel_cuentas">
+                                            <div class="pt-4">
+												<div>
+													<h4>Cuentas de Pago</h4>
+													<div class="d-flex justify-content-between align-items-center mb-3">
+														<p class="text-black m-0">Agregue desde aquí cada una de las cuentas o direcciones de wallet en donde desea recibir o enviar transacciones.</p>	
+														<button data-toggle="modal" data-target="#box-cuenta" class="btn btn-primary" id="btnNewCuenta"><i class="fa fa-plus"></i> Nueva cuenta</button>
+													</div>
+													<div class="row dz-scroll loadmore-content searchable-items list ps" id="todasLasCuentas">													
+														<div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+															<div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+														</div>
+														<div class="ps__rail-y" style="top: 0px; right: 0px;">
+															<div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div>
+														</div>
+													</div>
+													<!-- Modal -->
+                                                    <div class="modal fade" id="box-cuenta">
+														<div class="modal-dialog modal-dialog-centered" role="document">
+														  <div class="modal-content">
+															<div class="modal-header">
+															  <h3 id="title" class="modal-title">Nueva cuenta</h3>
+															  <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+															</div>
+															<div class="modal-body pt-0">
+																<ul class="nav nav-tabs">
+																	<li class="nav-item">
+																		<a class="nav-link active" data-toggle="tab" href="#cta-banco"><i class="la la-home mr-2"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cuenta bancaria</font></font></a>
+																	</li>
+																	<li class="nav-item">
+																		<a class="nav-link" data-toggle="tab" href="#cta-wallet"><i class="la la-user mr-2"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cuenta digital</font></font></a>
+																	</li>
+																</ul>
+																<div class="tab-content">
+																	<input type="hidden" id="cta_id" value="">
+																	<div class="tab-pane fade active show" id="cta-banco" role="tabpanel">
+																		<form id="form-cuenta-banco" class="mt-4">
+																			<div class="row">
+																				<div class="col-lg-6">
+																					<div class="form-group">
+																						<!--label class="text-black font-w600 d-block">País <span class="required">*</span></label>
+																						<select name="cmbPais" class="selectpicker countrypicker" id="cmbPais"
+																								data-live-search="true"
+																								data-default="United States"
+																								data-flag="true">
+																						</select-->
+																						<label class="text-black font-w600 d-block">Bancos <span class="required">*</span></label>
+																						<select data-live-search="true" required
+																						class="default-select" id="cmbPais">
+																							<option value="0" selected>Todos</option>
+																						</select>
+
+																					</div>
+																				</div>
+																				<div class="col-lg-6">
+																					<div class="form-group">
+																						<label class="text-black font-w600">Moneda <span class="required">*</span></label>
+																						<select name="cmbMoneda" class="form-control" id="cmbMoneda">
+																							<option value="USD">USD</option>
+																							<option value="EUR">EUR</option>
+																							<option value="MXN">MXN</option>
+																							<option value="CLP">CLP</option>
+																							<option value="PEN">PEN</option>
+																							<option value="COP">COP</option>
+																						</select>
+																					</div>
+																				</div>
+																			
+																				<div class="col-lg-6">
+																					<div class="form-group">
+																						<label class="text-black font-w600">Titular de la cuenta</label>
+																						<input type="text" class="form-control" name="titular" id="titular" placeholder="Nombre del titular de la cuenta.">
+																					</div>
+																				</div>
+																				<div class="col-lg-6">
+																					<div class="form-group">
+																						<label class="text-black font-w600">Número de cuenta <span class="required">*</span></label>
+																						<input type="text" class="form-control" name="numeroCuenta" id="numeroCuenta" placeholder="Escriba el número de cuenta">
+																					</div>
+																				</div>
+																				<div class="col-lg-6">
+																					<div class="form-group">
+																						<label class="text-black font-w600">Cédula</label>
+																						<input type="text" class="form-control" name="cedula" id="cedula" placeholder="Escriba su C.I">
+																					</div>
+																				</div>
+																				<div class="col-lg-6">
+																					<div class="form-group">
+																						<label class="text-black font-w600">Alias</label>
+																						<input type="text" class="form-control" name="alias" id="alias" placeholder="Alias de cuenta">
+																					</div>
+																				</div>
+																				<div class="col-lg-6">
+																					<div class="form-group mb-0">
+																						<input type="submit" value="Guardar" class="submit btn btn-primary btnGuardar" id="btnGuardarCuenta">
+																					</div>
+																				</div>
+																			</div>
+																		</form>
+																	</div>
+																	<div class="tab-pane fade" id="cta-wallet" role="tabpanel">
+																		<form id="form-cuenta-wallet" class="mt-4">
+																			<div class="row">
+																				<div class="col-lg-6">
+																					<div class="form-group">
+																						<label class="text-black font-w600">Alias</label>
+																						<input type="text" name="aliasWallet" class="form-control" id="alias-wallet" placeholder="Alias para la wallet">
+																					</div>
+																				</div>
+																				<div class="col-lg-6">
+																					<div class="form-group">
+																						<label class="text-black font-w600">Nombre de la red <span class="required">*</span></label>
+																						<select class="default-select" data-live-search="true" name="cmbRed" id="cmbRed">
+																						</select>
+																					</div>
+																				</div>
+																				<div class="col-lg-12">
+																					<div class="form-group">
+																						<label class="text-black font-w600">Dirección de wallet<span class="required">*</span></label>
+																						<input type="text" class="form-control" name="direccionWallet" id="direccion-wallet" placeholder="EJ: abd234DEf000...">
+																					<!-- pattern="^[a-zA-Z0-9]{64,255}"  -->
+																					</div>
+																				</div>
+																				<div class="col-lg-12">
+																					<div class="form-group mb-0">
+																						<input type="submit" value="Guardar wallet" class="submit btn btn-primary btnGuardar" id="btnGuardarWallet">
+																					</div>
+																				</div>
+																			</div>
+																		</form>
+																	</div>
+																</div>
+															</div>
+														  </div>
+														</div>
+													  </div>
+												</div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="seguridad">
+                                            <div class="pt-4">
+                                                <h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Este es el título del mensaje.</font></font></h4>
+                                                <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Denim crudo, probablemente no hayas oído hablar de los shorts de jean Austin. </font><font style="vertical-align: inherit;">Nesciunt tofu stumptown aliqua, retro synth master cleanse. </font><font style="vertical-align: inherit;">Bigote cliché temporario.
+                                                </font></font></p>
+                                                <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Denim crudo, probablemente no hayas oído hablar de los shorts de jean Austin. </font><font style="vertical-align: inherit;">Nesciunt tofu stumptown aliqua, retro synth master cleanse. </font><font style="vertical-align: inherit;">Bigote cliché temporario.
+                                                </font></font></p>
+                                            </div>
+                                        </div>
+										<div class="tab-pane fade" id="historial">
+											<div class="pt-4">
+                                                <h4><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Este es el título del perfil.</font></font></h4>
+                                                <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Denim crudo, probablemente no hayas oído hablar de los shorts de jean Austin. </font><font style="vertical-align: inherit;">Nesciunt tofu stumptown aliqua, retro synth master cleanse. </font><font style="vertical-align: inherit;">Bigote cliché temporario.
+                                                </font></font></p>
+                                                <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Denim crudo, probablemente no hayas oído hablar de los shorts de jean Austin. </font><font style="vertical-align: inherit;">Nesciunt tofu stumptown aliqua, retro synth master cleanse. </font><font style="vertical-align: inherit;">Bigote cliché temporario.
+                                                </font></font></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+				</div>
+			</div>
+        </div>
+		<div class="modal fade" id="mensajeRegistro">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Actualización de email.</h5>
+						<button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p>Hemos enviado un código a su nueva dirección <strong id="newMail"></strong>.
+							Por favor, introduce ese código para confirmar que eres tú.</p>
+						<div class="form-group">
+							<input class="form-control" type="text" id="token" 
+								required placeholder="Ej: 12574">
+							<div id="err">
+							</div>
+						</div>
+						<div class="text-right">
+							<button id="btn-generar" class="btn btn-info" disabled>Generar nuevo código</button>
+							<button id="btn-validar" class="btn btn-success">Validar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+        <div class="footer">
+            <div class="copyright">
+                <p>Copyright © Designed &amp; Developed by <a href="http://dexignzone.com/" target="_blank">DexignZone</a> 2021</p>
+            </div>
+        </div>
+    </div>
+    <script src="./vendor/global/global.min.js"></script>
+	<script src="./vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+	<script src="./vendor/lightgallery/js/lightgallery-all.min.js"></script>
+	<script src="./vendor/bootstrap-select-country/dist/js/bootstrap-select-country.min.js"></script>
+	
+	<!-- <script src="./vendor/chart.js/Chart.bundle.min.js"></script> -->
+	<script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" 
+		integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" 
+		referrerpolicy="no-referrer"></script>
+	<!-- <script src="./js/plugins-init/chartjs-init.js"></script> -->
+	<!-- <script src="./js/scripts/helper/graficos.js"></script> -->	
+	<script src="./js/custom.min.js"></script>
+	<script src="./js/deznav-init.js"></script>
+	<script src="./js/scripts/profile.js" type="module"></script>
+
+</body>
+</html>
