@@ -19,20 +19,19 @@ import { WebSocketClient } from './web_socket_client.js';
 // import react react-dom
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './solana-devtools/buttonConnect'
-
-// my component react
-//import { MyComponent } from './HTMLComponents/react_component'
+import ButtonWallet from './solana-devtools/buttonConnect'
 
 // inicio de prueba con reactJS
-/*const UIManager = {
-    getColor: function (parent, callback) {
-        callback($("#oferCount").css('background-color'), parent)
+const UIManager = {
+    hide: function (parent, callback) {
+        //callback($("#myTabContent").css('background-color'), parent)
+        //callback($("#myTabContent").hide(), parent)
+        $("#myTabContent").hide()
     },
-    setColor: function (name) {
-        $("#oferCount").css('background-color', name);
+    show: function () {
+        $("#myTabContent").show();
     }
-}; */
+};
 /// fin de objeto de prueba
 
 let nota = `Presione el botón <strong>Pagar, siguiente</strong> solo si está seguro de haber realizado`
@@ -59,6 +58,10 @@ const solicitudCompra = new SolicitudCompra(null)
 
 // función LOAD
 $(async function () {
+    // renderizamos componente react
+    let root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<ButtonWallet context={UIManager} />)
+
     $("#mensajeRegistro").on("hidden.bs.modal", () => window.location.href = window.location.origin)
     modelo.consultarEstadoCuentaUsuario(userSession.email)
     .then(estadoUsuario => {
@@ -156,13 +159,6 @@ $(async function () {
     $("#send-message").click(enviarMensajeChat)
     $("#text-message").keypress(enviarMensajeChatConENTER)
     $("#send-image").change(enviarMensajeChat)
-
-    /*setTimeout(function()  {*/
-    let root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(
-        React.createElement(App /*, { context: UIManager }*/)
-    )
-    /*}, 0)*/
 });
 
 // funciones para renderizar en la GUI
