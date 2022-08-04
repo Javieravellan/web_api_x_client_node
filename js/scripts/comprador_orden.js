@@ -137,7 +137,6 @@ async function cargarDatosEnFormularioDePago(oferta) {
         }
     }
     currentOffer = oferta;
-    console.log(oferta)
     $("#cantidad").html(`${oferta.cantidadRequerimiento} ${oferta.requerimientoDescripcion}`)
     $("#precio").html(`${oferta.valorOferta} ${oferta.descripcionValorOferta}`)
     let result = oferta.cantidadRequerimiento / oferta.valorOferta
@@ -148,7 +147,6 @@ async function cargarDatosEnFormularioDePago(oferta) {
 }
 
 function cargarDatosCuentaReceptora(cta) {
-    console.log(cta)
     $("#direccion").html(cta.numeroCuenta)
     $("#red").html(cta.nombreBanco)
 }
@@ -162,7 +160,6 @@ function crearBotonesPago() {
 
 function mostrarDatosCuenta(res) {
     let html = `<div style='height: 150px;overflow-y: scroll;'>`
-    console.log(res)
     if(res.length || res.length > 1) {
         res.forEach((elem) => {
             html += `<div class="chat-list-area" style='margin-right:.5em;margin-bottom: .5rem;padding: 0.5rem; border-bottom: 1px solid #ccc;'><div class="info-body">`
@@ -698,7 +695,6 @@ async function denunciarTransaccion(idOferta, idTransaccion, idVen) {
 }
 
 function elegirOpcion(e) {
-    console.log(e.target.value)
     if (e.target.value == 1) {
         $(".disabled").attr("disabled", false)
     } else {
@@ -752,7 +748,7 @@ function evaluarEstadoAceptada(item) {
     }
 }
 
-function onClickEnEmpezar(oferta) {
+async function onClickEnEmpezar(oferta) {
     $("#splash").fadeOut(300)
     $("#tab").show(300)
     $("a[href='#datos_pago']").removeClass("disabled").click()
@@ -760,7 +756,18 @@ function onClickEnEmpezar(oferta) {
     $("a[href='#califica']").addClass("disabled")
     $(`#ver_${oferta.idUsuario}`).html("En proceso")
     $(`#rechazar_${oferta.idUsuario}`).hide() // oculta botón rechazar
-   
+    // enviar nuevos datos solo si se seleccionó la opción 'otro'
+    if ($("input[type=radio][name=opciones]").val() == 1
+        && $("#cmbOtraRed").val() != "" && $("#otraDireccion").val().trim() != "") {
+        const opcionSeleccionada = $("input[type=radio][name=opciones]").val()
+        const nomCta = $("#cmbOtraRed").val()
+        const dirCta = $("#otraDireccion").val().trim()
+        let ok = await cuentaBancos.agregarNuevaCuentaReceptora(oferta.idOrden, opcionSeleccionada, nomCta, dirCta)
+        if (ok != 1) {
+            alert("Hubo un error al guardar la nueva cuenta. Intente otra vez")
+            return;
+        }
+    }
     tran.crearTransaccionInicial({
         idOferta: oferta.idOferta, idOrden: oferta.idOrden,
         estado: 1, idComprador: idUsuario, idVendedor: oferta.idUsuario,

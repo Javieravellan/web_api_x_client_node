@@ -142,4 +142,23 @@ export class CuentaBanco {
             })
         })
     }
+
+    agregarNuevaCuentaReceptora(idOrden, esOtraCta, nomCta, dirOtraCta) {
+        const params = `?idOrden=${idOrden}&esOtraCta=${esOtraCta}&nomOtraCta=${nomCta}&dirOtraCta=${dirOtraCta}`
+        return new Promise((resolve, reject)=> {
+            $.ajax({
+                url: `${this.server}/otraCuentaReceptora${params}`,
+                type: 'POST',
+                headers: {
+                    "Authorization": "Bearer "+sessionStorage.getItem("token"),
+                    "Content-Type": 'application/json'
+                },
+                success: (res) => resolve(res),
+                error:  err => { 
+                    cerrarSession(err)
+                    reject(err)
+                }
+            })
+        })
+    }
 }
