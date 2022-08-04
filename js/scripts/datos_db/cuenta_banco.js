@@ -124,4 +124,22 @@ export class CuentaBanco {
             })
         })
     }
+
+    obtenerCuentaReceptoraPorId(idCuenta) {
+        return new Promise((resolve, reject)=> {
+            $.ajax({
+                url: `${this.server}/cuentaReceptora`,
+                type: 'GET',
+                headers: {
+                    "Authorization": "Bearer "+sessionStorage.getItem("token")
+                },
+                data: `idcuenta=${idCuenta}`,
+                success: (res) => resolve(res),
+                error:  err => { 
+                    cerrarSession(err)
+                    reject(err)
+                }
+            })
+        })
+    }
 }

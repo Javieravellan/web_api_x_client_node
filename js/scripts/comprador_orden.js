@@ -33,22 +33,30 @@ nota += `será sancionado.`
 let ordenActual = null
 let idOfertante = null, idTransaccionActual = null
 let rutaFotoPerfil = `${URL_BASE}`;
+let cuentaBancos = new CuentaBanco()
 
 $(function() {
+    $(".disabled").attr("disabled", true)
+    $("input[type=radio][name=opciones]").on('change', elegirOpcion)
     if (validarParametro(paramId.get("idOrden"))) {
         $("#nameUser").html(nameUser)
         $("#idUser").html(idUsuario)
         $(".foto-perfil").attr("src", `${rutaFotoPerfil}${userSession.photoProfile}`)
         let valorParametro = paramId.get("idOrden")
         solicitudCompra.obtenerSolicitudCompraPorId(valorParametro, idUsuario)
-        .then(response => {
+        .then(async response => {
             showData([response])
             $("#send-message").click(enviarMensajeChat)
             $("#text-message").keypress(enviarMensajeChatConENTER)
             $("#send-image").change(enviarMensajeChat)
-
             $("#modena_compra").html(ordenActual.valorEntregaDescipcion)
             obtenerOfertas(valorParametro, idUsuario)
+            // obtener la cuenta receptora, es algo nuevo..
+            let idReceptores = response.idsReceptores
+            if (idReceptores.includes(",")) idReceptores = idReceptores.split(",")[0]
+            let cta = await cuentaBancos.obtenerCuentaReceptoraPorId(idReceptores)
+            cargarDatosCuentaReceptora(cta)
+            // fin obtener la cuenta receptora.
             setTimeout(async () => {
                 try {
                     let programadas = await modeloOferta.obtenerOfertasProgramadasDisponibles(
@@ -119,7 +127,7 @@ async function cargarDatosEnFormularioDePago(oferta) {
                 receptores: oferta.receptores,
                 idsReceptores: oferta.idsReceptores,
                 idOrdenCreacion: oferta.idOrden
-            }; console.log(oferta);
+            };
             modeloOferta = new OfertaModelo(newOfer)
             try {
                 oferta = await modeloOferta.crearOferta()
@@ -129,13 +137,20 @@ async function cargarDatosEnFormularioDePago(oferta) {
         }
     }
     currentOffer = oferta;
+    console.log(oferta)
     $("#cantidad").html(`${oferta.cantidadRequerimiento} ${oferta.requerimientoDescripcion}`)
     $("#precio").html(`${oferta.valorOferta} ${oferta.descripcionValorOferta}`)
     let result = oferta.cantidadRequerimiento / oferta.valorOferta
     $("#recibe").html(`${result.toFixed(result >= 1 ? 2 : 6)} ${ordenActual.valorEntregaDescipcion}`)
-    $("#div_empezar").html(`<button id="empezar_${oferta.idOferta}" class="btn btn-warning">Ir a datos de pago</button>`)
+    $("#div_empezar").html(`<button id="empezar_${oferta.idOferta}" class="btn btn-warning btn-sm">Aceptar</button>`)
     oferta.valorEntregadoDescripcion = ordenActual.valorEntregaDescipcion
     gestionarEstadoTransaccionPorIdOferta(oferta)
+}
+
+function cargarDatosCuentaReceptora(cta) {
+    console.log(cta)
+    $("#direccion").html(cta.numeroCuenta)
+    $("#red").html(cta.nombreBanco)
 }
 
 function crearBotonesPago() {
@@ -562,7 +577,6 @@ function obtenerOfertas(idOrden, idUsuario) {
     let ofertada = new SolicitudOfertada({id: idOrden, idUsuario: idUsuario})
     ofertada.obtenerOfertasdeVentaParaUsuario()
     .then(response => {
-        console.log(response)
         if (response.length > 0) {
             showOfertasParaEstaOrden(response)
             $("#ofertantes").children().length > 0 ? $("#caja_favorito").show() : $("#caja_favorito").hide()
@@ -683,6 +697,15 @@ async function denunciarTransaccion(idOferta, idTransaccion, idVen) {
     $("body").css("opacity", "1")
 }
 
+function elegirOpcion(e) {
+    console.log(e.target.value)
+    if (e.target.value == 1) {
+        $(".disabled").attr("disabled", false)
+    } else {
+        $(".disabled").attr("disabled", true)
+        $("#otraDireccion").val('')
+    }
+}
 async function enviarMensajeChat(e) {
     let msg = $("#text-message").val().trim();
     let tipo = 1 // texto
