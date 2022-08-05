@@ -10,18 +10,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.2",
-    "open": "^7.4.2",
-    "process": "^0.11.10",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "socket.io": "^2.0.4",
     "@project-serum/anchor": "^0.25.0",
     "@solana/wallet-adapter-base": "^0.9.9",
     "@solana/wallet-adapter-react": "^0.15.8",
     "@solana/wallet-adapter-react-ui": "^0.9.10",
     "@solana/wallet-adapter-wallets": "^0.16.8",
-    "@solana/web3.js": "^1.48.0"
+    "@solana/web3.js": "^1.48.0",
+    "express": "^4.16.2",
+    "open": "^7.4.2",
+    "process": "^0.11.10",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "socket.io": "^2.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.18.9",

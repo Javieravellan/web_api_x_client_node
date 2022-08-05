@@ -525,7 +525,7 @@ function gestionarEstadoTransaccionPorIdOferta(oferta) {
             default:    // si no hay estado, entonces mostramos de cero
                 $("#s-info").removeClass("d-none").addClass("d-block")
                 $("#mensaje_aviso2").addClass('d-none').removeClass("d-block")
-                $("#tab").hide(300)
+                //$("#tab").hide(300)
                 obtenerCuentasDeBanco(oferta)
                 $("#empezar_"+oferta.idOferta).click(() => onClickEnEmpezar(oferta))
                 $("#splash").show()
@@ -622,7 +622,6 @@ async function alCalificar(data) {
                 idOrden: data.idOrden,
                 idOferta: $("#p_orden").attr("data-actual")
             }
-            //console.log(finalizaTransaccion); return;
             let res = await tran.finalizarTransaccion(finalizaTransaccion)
             if (!res) $(`#item_${idOfertante}`).remove()
             // emitir evento de finalizado
@@ -750,16 +749,16 @@ function evaluarEstadoAceptada(item) {
 
 async function onClickEnEmpezar(oferta) {
     $("#splash").fadeOut(300)
-    $("#tab").show(300)
+    //$("#tab").show(300)
     $("a[href='#datos_pago']").removeClass("disabled").click()
     $("a[href='#espera_envio']").addClass("disabled")
     $("a[href='#califica']").addClass("disabled")
     $(`#ver_${oferta.idUsuario}`).html("En proceso")
     $(`#rechazar_${oferta.idUsuario}`).hide() // oculta botón rechazar
     // enviar nuevos datos solo si se seleccionó la opción 'otro'
-    if ($("input[type=radio][name=opciones]").val() == 1
-        && $("#cmbOtraRed").val() != "" && $("#otraDireccion").val().trim() != "") {
-        const opcionSeleccionada = $("input[type=radio][name=opciones]").val()
+    if ($("#opcion2").is(':checked') && $("#cmbOtraRed").val() != "" 
+        && $("#otraDireccion").val().trim() != "") {
+        const opcionSeleccionada = $("#opcion2").val()
         const nomCta = $("#cmbOtraRed").val()
         const dirCta = $("#otraDireccion").val().trim()
         let ok = await cuentaBancos.agregarNuevaCuentaReceptora(oferta.idOrden, opcionSeleccionada, nomCta, dirCta)
@@ -768,6 +767,11 @@ async function onClickEnEmpezar(oferta) {
             return;
         }
     }
+    // mostrando la pantalla de espera para confirmar que se hizo el depósito
+    $("#espera-confirmacion-garantia").css("display", "flex")
+    // escuchar evento socket
+    cliente.socket.once('depositado', (d) => console.log("El vendedor ha depositado la garantía...", d))
+    return
     tran.crearTransaccionInicial({
         idOferta: oferta.idOferta, idOrden: oferta.idOrden,
         estado: 1, idComprador: idUsuario, idVendedor: oferta.idUsuario,

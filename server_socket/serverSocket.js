@@ -41,6 +41,7 @@ function onConnection(socket) {
     socket.on('tran-cancel', onTransaccionCancelada)
     socket.on("chat-message", onNewChatMessage)
     socket.on('tran-finalizada', onTransaccionFinalizada)
+    socket.on('deposito', depositoDeGarantia)
 }
 
 function onConnectError(err) {
@@ -144,6 +145,13 @@ function onTransaccionFinalizada(data) {
     let receptor = clients.find(elem => data.idOfertante == elem.idUser)
     if (receptor == undefined) return;
     serverSocket.to(receptor.socketID).emit('tran-finalizada', data);
+}
+
+function depositoDeGarantia(data) {
+    console.log(data)
+    let receptor = clients.find(p => p.idUser == data.idUser)
+    console.log(receptor, data)
+    serverSocket.to(receptor.socketID).emit('depositado', data)
 }
 
 function _buscarClienteRegistrado(idUser) {

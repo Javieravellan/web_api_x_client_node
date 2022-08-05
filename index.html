@@ -39,6 +39,9 @@
 				font-size: .953rem !important;
 			}
     	}
+		.oculto {
+			display: none;
+		}
 	</style>
 </head>
 
@@ -245,31 +248,7 @@
 
 		<div class="deznav">
 			<div class="deznav-scroll">
-				<!-- <div class="main-profile">
-							<div class="image-bx">
-								<img src="images/Untitled-1.jpg" alt="">
-								<a href="javascript:void(0);"><i class="fa fa-cog" aria-hidden="true"></i></a>
-							</div>
-							<h5 class="name"><span class="font-w400">Hello,</span> Marquez</h5>
-							<p class="email">marquezzzz@mail.com</p>
-						</div> -->
 				<ul class="metismenu" id="menu">
-					<!-- <li class="nav-label first">Main Menu</li>
-		                    <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-									<i class="flaticon-144-layout"></i>
-									<span class="nav-text">Dashboard</span>
-								</a> -->
-					<!-- <ul aria-expanded="false">
-									<li><a href="index.html">Dashboard Light</a></li>
-									<li><a href="index-2.html">Dashboard Dark</a></li>
-									<li><a href="my-wallets.html">Wallet</a></li>
-									<li><a href="tranasactions.html">Transactions</a></li>
-									<li><a href="coin-details.html">Coin Details</a></li>
-									<li><a href="portofolio.html">Portofolio</a></li>
-									<li><a href="market-capital.html">Market Capital</a></li>
-								</ul>
-		
-		                    </li> -->
 					<li class="nav-label">Principal</li>
 					<li class=" mm-active"><a class="has-arrow ai-icon" href="javascript:void(0)" aria-expanded="true">
 							<i class="flaticon-077-menu-1" style="vertical-align: baseline"></i>
@@ -433,7 +412,7 @@
 											<div id="recibe" class="col-md-12 h4 text-dark">0.00015 ETH</div>
 										</div>
 									</div>
-									<div class="d-flex justify-content-end chat-box-header">
+									<div class="d-flex justify-content-end chat-box-header oculto">
 										<div class="row">
 											<h6 class="col-md-12"></h6>
 										</div>
@@ -442,7 +421,7 @@
 													class="text-danger">00:00</span></div>
 										</div>
 									</div>
-									<div id="tab" class="card-action card-tabs">
+									<div id="tab" class="card-action card-tabs oculto">
 										<ul class="nav nav-tabs style-3" role="tablist">
 											<li class="nav-item">
 												<a class="nav-link active" data-toggle="tab" href="#espera_pago"
@@ -477,8 +456,9 @@
 										</ul>
 									</div>
 									<div class="card-body message-bx px-0 pt-3">
-										<div class="tab-content" style="height:320px"
-											id="message-bx">
+										<div class="" id="react-app">
+										</div>
+										<div class="tab-content oculto" style="height:320px;" id="message-bx">
 											<div class="tab-pane fade active show" id="espera_pago" role="tabpanel">
 												<div class="chat-list-area" data-chat="person2">
 													<div class="image-bx">
@@ -572,72 +552,6 @@
 			</div>
 
 			<div class="container-fluid">
-				<!-- <div class="project-nav">
-					<div class="card-action card-tabs">
-						<ul class="nav nav-tabs style-2">
-							<li class="nav-item">
-								<a id="tabDisponibles" href="#navpills-1" class="nav-link active" data-toggle="tab"
-									aria-expanded="false"
-									style="font-size: 22px;color: #68cf29;  display: block;font-weight: 600;">Usuarios comprando </a>
-							</li>
-							<li id="tabOfertando" class="nav-item">
-								<a href="#navpills-2" class="nav-link" data-toggle="tab" aria-expanded="false">Ofertando
-									en <span id="oferCount" class="badge badge-pill badge-info shadow-info">0</span></a>
-							</li>
-							<li style='display: none;' id="tabAceptadas" class="nav-item">
-								<a href="#navpills-3" class="nav-link" data-toggle="tab"
-									aria-expanded="true">Aceptadas<span
-										class="badge badge-pill badge-warning shadow-warning">4</span></a>
-							</li>
-						</ul>
-					</div>
-					<div class="row">
-						<div class="col">
-							<div class="input-group search-area right d-lg-inline-flex">
-								<div class="d-flex">
-									<label class="align-self-center font-w500 m-0">Recibe en: </label>
-								</div>
-								<select data-live-search="true" required
-								class="default-select" id="cmbRecibos">
-									<option value="0" selected>Todos</option>
-								</select>
-							</div>
-						</div>
-						<div class="col">
-							<div class="input-group search-area right d-lg-inline-flex">
-								<div class="d-flex">
-									<label class="align-self-center font-w500 m-0">Pagando en: </label>
-								</div>
-								<select data-live-search="true" required
-								class="default-select" id="cmbPagos">
-									<option value="0" selected>Todos</option>
-								</select>
-							</div>
-						</div>
-						<div class="col">
-							<div class="input-group search-area right d-lg-inline-flex">
-								<div class="d-flex">
-									<label class="align-self-center font-w500 m-0">Activos: </label>
-								</div>
-								<input id="cBusqueda" type="text" class="form-control" value="ETH, BTC" disabled>
-								<div class="input-group-append">
-									<span class="input-group-text">
-										<a id="btnPreferencias" data-toggle="modal" data-target="#modal-preferencias" href="javascript:void(0)">
-											<i class="flaticon-381-search-2"></i>
-										</a>
-									</span>
-								</div>
-							</div>
-						</div>						
-					</div>
-					<button style="display: none;" data-toggle="modal" data-target="#sendMessageModal" type="button"
-						class="btn btn-whatsapp">
-						<font style="vertical-align: inherit;">
-							<font style="vertical-align: inherit;">Crear Solicitud </font>
-						</font><span class="btn-icon-right"><i class="fa fa-whatsapp"></i></span>
-					</button>
-				</div> -->
-				
 				<div class="project-nav justify-content-start">
 					<div class="card-action card-tabs">
 						<ul class="nav nav-tabs style-2">

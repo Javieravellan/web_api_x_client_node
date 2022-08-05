@@ -17,7 +17,7 @@ require("@solana/wallet-adapter-react-ui/styles.css")
 
 class ButtonWallet extends React.Component {
     /**
-     * Wallet porviders available
+     * Wallet providers available
      */
     phantom = new PhantomWalletAdapter()
     glow = new GlowWalletAdapter()
@@ -33,51 +33,10 @@ class ButtonWallet extends React.Component {
             context: props.context,
             isShow: true
         }
-
-        this.onConnect = this.onConnect.bind(this);
-        this.onDisconnect = this.onDisconnect.bind(this);
-        //this._managePanel = this._managePanel.bind(this);
-
-        this.phantom.on('connect', this.onConnect); // evento al conectar
-        this.phantom.on('disconnect', this.onDisconnect) // evento al desconectar
-    }
-
-    onConnect() {
-        if (!this.state.isShow) {
-            this.state.context.show();
-            this.setState({
-                ...this.state.context,
-                isShow: true
-            })
-        }
-    }
-
-    onDisconnect() {
-        if (this.state.isShow) {
-            this.state.context.hide();
-            this.setState({
-                ...this.state.context,
-                isShow: false
-            })
-        }
-    }
-
-    _managePanel(isShow) {
-        if (this.state.isShow) {
-            this.state.context.hide();
-            isShow = !this.state.isShow;
-        } else {
-            this.state.context.show();
-            isShow = !this.state.isShow;
-        }
-        this.setState({
-            ...this.state.context,
-            isShow: isShow
-        })
     }
 
     componentDidMount() {
-        if (!this.phantom.connected) this.onDisconnect();
+        //if (!this.phantom.connected) this.onDisconnect();
     }
 
     render() {
@@ -88,7 +47,7 @@ class ButtonWallet extends React.Component {
                     onError={(err)=>console.log(err)}
                     autoConnect={true}>
                     <WalletModalProvider>
-                        <ButtonConnect />
+                        <WalletMultiButton />
                     </WalletModalProvider>
                 </WalletProvider>
             </ConnectionProvider>
@@ -96,7 +55,7 @@ class ButtonWallet extends React.Component {
     }
 }
 
-const ButtonConnect = () => {
+/*const ButtonConnect = () => {
     const { connection } = useConnection()
     const { pubKey, sendTransaction } = useWallet()
 
@@ -105,6 +64,6 @@ const ButtonConnect = () => {
             <WalletMultiButton />
         </div>
     )
-}
+}*/
 
 export default ButtonWallet;

@@ -19,20 +19,7 @@ import { WebSocketClient } from './web_socket_client.js';
 // import react react-dom
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import ButtonWallet from './solana-devtools/buttonConnect'
-
-// inicio de prueba con reactJS
-const UIManager = {
-    hide: function (parent, callback) {
-        //callback($("#myTabContent").css('background-color'), parent)
-        //callback($("#myTabContent").hide(), parent)
-        $("#myTabContent").hide()
-    },
-    show: function () {
-        $("#myTabContent").show();
-    }
-};
-/// fin de objeto de prueba
+import { MyComponent } from './HTMLComponents/react_component.js';
 
 let nota = `Presione el botón <strong>Pagar, siguiente</strong> solo si está seguro de haber realizado`
 nota += ` la transacción de pago, en caso contrario, si lo oprime sin haber realizado el pago `
@@ -56,12 +43,30 @@ let rutaFotoPerfil = URL_BASE
 const activos = new RoomsActivos()
 const solicitudCompra = new SolicitudCompra(null)
 
+// inicio de prueba con reactJS
+var UIManager = {
+    ocultarEmitir: function (callback) {
+        $("#react-app").hide()
+        // activar el esperando al comprador
+        $(".oculto").css("display", 'initial')
+        // llamando al callback
+        let datosEnviar = callback()
+        if (datosEnviar) {
+            console.log(datosEnviar)
+            cliente.socket.emit("deposito", {
+                idUser: datosEnviar.idSolicitante,
+                idOrden: datosEnviar.idOrden, 
+                monto: datosEnviar.monto
+            })
+        }
+    },
+};
+/// fin de objeto de prueba
+
+let root = ReactDOM.createRoot(document.getElementById('react-app'))
+
 // función LOAD
 $(async function () {
-    // renderizamos componente react
-    let root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<ButtonWallet context={UIManager} />)
-
     $("#mensajeRegistro").on("hidden.bs.modal", () => window.location.href = window.location.origin)
     modelo.consultarEstadoCuentaUsuario(userSession.email)
     .then(estadoUsuario => {
@@ -183,7 +188,6 @@ function crearBotonesPago() {
 
 function mostrarDatosCuenta(res) {
     let html = `<div style='height: 150px;overflow-y: scroll;'>`
-    console.log(res)
     if (res.length || res.length > 1) {
         res.forEach((elem) => {
             html += `<div class="chat-list-area" style='margin-right:.5em;margin-bottom: .5rem;padding: 0.5rem; border-bottom: 1px solid #ccc;'><div class="info-body">`
@@ -296,9 +300,12 @@ function showData(data, esPaginacion=false) {
             $(`#oferta_${item.idOrden}`).hide();
         }
         if (item.estado == "aceptada" || item.estado == "cancelada"
-            || item.estado == "denunciada" || item.idChat !== 0) {
-                // $(`#sol_bolt_${item.idOrden}`).click(() => onClickDeOfertaAceptada(item))
-            $(`#sol_bolt_${item.idOrden}`).click(() => onClickDeOfertaAceptada2(item.idOrden,item.idOferta,item.idUsuario))
+            || item.estado == "denunciada" || item.idChat !== 0 || item.esOtraCuenta == 1) {
+            let otraCta = {
+                otraRed: item.nomOtraCuenta,
+                otraDir: item.dirOtraCuenta
+            }
+            $(`#sol_bolt_${item.idOrden}`).click(() => onClickDeOfertaAceptada2(item.idOrden, item.idOferta, item.idUsuario, otraCta))
         }
 
         mostrarEstadoOrden(item)
@@ -321,7 +328,7 @@ function showMessageReceived(msg, fechaHora, tipo) {
         <p style="padding: 10px" class='mb-1'>${msgBox}</p>
         <span class="fs-12 text-black">${hora}</span>
       </div>
-  </div>`
+    </div>`
     $("#inbox").append(component)
 }
 
@@ -397,9 +404,9 @@ function showOfertadas(data) {
             $("#navpills-2").prepend(newItem)
         }
         if (item.estado == "aceptada" || item.estado == "cancelada"
-        || item.estado == "denunciada" || item.idChat !== 0){
-            // $(`#ofer_bolt_${item.idOrden}`).click(() => onClickDeOfertaAceptada(item))
-            $(`#ofer_bolt_${item.idOrden}`).click(() => onClickDeOfertaAceptada2(item.idOrden, item.idOferta, item.idUsuario))
+        || item.estado == "denunciada" || item.idChat !== 0 || item.esOtraCuenta === 1) {
+            let otraCta = {otraRed: item.nomOtraCuenta, otraDir: item.dirOtraCuenta}
+            $(`#ofer_bolt_${item.idOrden}`).click(() => onClickDeOfertaAceptada2(item.idOrden, item.idOferta, item.idUsuario, otraCta))
             $(`div[id*='_bolt_${item.idOrden}'].power-ic`).css({'color': 'var(--secondary)'})
         }
         mostrarEstadoOrden(item)
@@ -495,7 +502,6 @@ async function obtenerBilleteras() {
                 let option = $('<option/>', {
                     'value': elem.idBilletera,
                     'html': `${elem.nombre}`,
-                    //"data-todos": `${(elem.nombreBanco.includes("Todos")) ? elem.inicialesPais : null}`,
                     'data-content': `<span style="display:inline-block;background-color: rgb(${red},${green}, ${blue});width:5px; height:14px"></span>&nbsp;<span>${elem.nombre}</span>` 
                 })
                 $(cmbRecibos).append(option)
@@ -888,7 +894,6 @@ function mostrarEstadoOrden(item, esSocket = false) {
 }
 
 function onNewSolicitudCompra(data) {
-    console.log(data)
     if (!userSession.preferencias.includes(data.idRoomActivo)) return
     if (cliente.io.id !== data.IDEmisor && $("#alerta").children().length === 0) {
         let alerta = crearAlerta(data.count)
@@ -1093,16 +1098,13 @@ function gestionarEstadoTransaccion2(idOrden, idOferta, idSolicitante) {
     let compradorId = idSolicitante;
     transaccion.obtenerEstadoTransaccionPorIdOferta(idOferta, compradorId, idUsuarioLogeado, false)
         .then(res => {
-            //console.log(res)
             idOfertante = compradorId
             idTransaccionActual = (res.transaccion) ? res.transaccion.idTransaccion : null
-            console.log(compradorId)
             $("#chatDest").html($("span[data-userId='" + compradorId + "']").html())
             $("#name-comprador").html("a "+$("#chatDest").html())
-            // $("#p_orden").html(`#00${data.idOrden}`).attr("data-actual", data.idOferta)
             $("#p_orden").html(`#00${idOrden}`).attr("data-actual", idOferta)
-            let foto = (!$(`#solicitud_${idOrden}`).attr('data-ip')) ? $(`div[id*='_${idOrden}']`).attr("data-ip"): 
-                $(`#solicitud_${idOrden}`).attr('data-ip');
+            let foto = (!$(`#solicitud_${idOrden}`).attr('data-ip')) ? $(`div[id*='_${idOrden}']`).attr("data-ip")
+                : $(`#solicitud_${idOrden}`).attr('data-ip');
             $("#foto-oferta-actual").attr('src',  URL_BASE + foto)
             showMessagesChatDb(res.chat)
             mostrarDatosCuenta(res.ctas)  // muestra los datos de la cuenta del comprador
@@ -1133,7 +1135,7 @@ function gestionarEstadoTransaccion2(idOrden, idOferta, idSolicitante) {
                     }
                     $("#siguiente").click(() => guardarFechaPagoVendedor(dataSocket))
                     $("#btnCancelar").click(() => cancelarTransaccion(res.transaccion.idTransaccion, compradorId,
-                        /*dataidOferta, data.idOrden*/ idOferta, idOrden))
+                        idOferta, idOrden))
                     break;
                 case 3:
                     $("a[href='#califica']").removeClass("disabled").click()
@@ -1167,18 +1169,18 @@ function gestionarEstadoTransaccion2(idOrden, idOferta, idSolicitante) {
     $("#modal_pago").modal("show")
 }
 
-function onClickDeOfertaAceptada2(idOrden, idOferta, idSolicitante) {
+function onClickDeOfertaAceptada2(idOrden, idOferta, idSolicitante, otraCta) {
+    if (otraCta != null) {
+        UIManager = {...UIManager, idOrden: idOrden, idUser: idSolicitante, otraCta: otraCta}
+        root.render(<MyComponent context={UIManager} />)
+    }
     currentOrder = {
         idOrden: idOrden, 
         idOferta: idOferta, 
         idSolicitante: idSolicitante
     };
     new OfertaModelo(null).obtenerOfertaPorId(idOferta)
-        .then(res => {
-            //sessionStorage.setItem(data.idOferta, JSON.stringify(res))
-            mostrarDatosEnFormDePago(res)
-        })
-        .catch(err => console.log("Error al intentar recuperar los datos de la oferta " + idOferta))
-    //}
+    .then(res => mostrarDatosEnFormDePago(res))
+    .catch(err => console.log("Error al intentar recuperar los datos de la oferta " + idOferta))
     gestionarEstadoTransaccion2(idOrden, idOferta, idSolicitante)
 }
